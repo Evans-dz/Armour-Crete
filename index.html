@@ -583,33 +583,28 @@ footer{background:#070d1a;padding:56px 6% 28px;color:rgba(255,255,255,0.5)}
       </div>
       <div class="calc-field">
         <label>Service Type</label>
-        <select id="calcService" onchange="calcEstimate()">
-          <option value="" disabled selected>Select a service</option>
-          <option value="basic">Concrete Sealing — Basic ($0.85/sq ft)</option>
-          <option value="premium">Concrete Sealing — Premium ($1.25/sq ft)</option>
-          <option value="decorative">Decorative / Wet Look ($2.00/sq ft)</option>
-          <option value="pool">Pool Salt Shield ($2.00/sq ft)</option>
-          <option value="foundation">Foundation Waterproofing ($0.70/sq ft)</option>
-        </select>
-      </div>
-    </div>
-    <div class="calc-result" id="calcResult" style="display:none">
-      <div>
-        <div class="calc-result-label">Estimated Starting Price</div>
-        <div class="calc-result-price" id="calcPrice">$0</div>
-        <div class="calc-result-note" id="calcNote"></div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px">Package Selected</div>
-        <div style="font-family:'Oswald',sans-serif;font-size:16px;color:rgba(255,255,255,0.7)" id="calcPkgName"></div>
-      </div>
-    </div>
-    <p class="calc-disclaimer">* Estimates are based on the lowest starting rate for the selected package. Actual pricing may vary depending on surface condition, prep required, number of coats, and access. A free on-site bid is always the most accurate way to get your price.</p>
-    <div class="calc-cta">
-      <a href="#contact" class="btn-blue">Book My Free Bid →</a>
-      <p>No obligation · Fast response · Fair pricing</p>
-    </div>
-  </div>
+        var rates={basic:{rate:0.85,name:'Basic Protection'},premium:{rate:1.25,name:'Premium Protection (Most Popular)'},decorative:{rate:2.00,name:'Decorative / Wet Look'},pool:{rate:2.00,name:'Pool Salt Shield'},foundation:{rate:0.70,name:'Foundation Waterproofing'}};
+function calcEstimate(){
+  var sqft=parseFloat(document.getElementById('calcSqft').value)||0;
+  var svc=document.getElementById('calcService').value;
+  var res=document.getElementById('calcResult');
+  var empty=document.getElementById('calcEmpty');
+  var btnPrice=document.getElementById('calcBtnPrice');
+  if(sqft>0&&svc&&rates[svc]){
+    var r=rates[svc];
+    var low=Math.round(sqft*r.rate);
+    document.getElementById('calcPrice').textContent='$'+low.toLocaleString();
+    document.getElementById('calcNote').textContent=sqft.toLocaleString()+' sq ft × $'+r.rate+'/sq ft';
+    res.style.display='flex';
+    empty.style.display='none';
+    btnPrice.textContent='Est. $'+low.toLocaleString();
+    btnPrice.style.display='inline-block';
+  } else {
+    res.style.display='none';
+    empty.style.display='flex';
+    btnPrice.style.display='none';
+  }
+}
 </section>
 
 <!-- GALLERY -->
