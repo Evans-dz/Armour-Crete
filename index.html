@@ -117,20 +117,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--black);heig
 .price-package .pkg-price.custom{font-size:20px;color:var(--gold)}
 .service-img-mock{background:linear-gradient(135deg,#1a3a8f22,#00000044);border:1px solid rgba(0,0,0,0.08);border-radius:4px;height:180px;display:flex;align-items:center;justify-content:center;color:var(--gray-light);font-size:13px;letter-spacing:0.1em;text-transform:uppercase;margin-top:16px;font-family:'Oswald',sans-serif}
 
-/* ---- PRICING CALCULATOR ---- */
-.calc-wrap{background:var(--white);border-radius:6px;padding:40px;box-shadow:0 4px 40px rgba(0,0,0,0.12);max-width:860px;margin:0 auto}
-.calc-intro{font-size:15px;line-height:1.7;color:var(--gray);margin-bottom:32px;max-width:600px}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
-.calc-field label{display:block;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
-.calc-field input,.calc-field select{width:100%;background:var(--gray-bg);border:1.5px solid #e0e0e0;border-radius:3px;padding:13px 16px;font-family:'Source Sans 3',sans-serif;font-size:15px;color:var(--black);outline:none;transition:border-color 0.2s}
-.calc-field input:focus,.calc-field select:focus{border-color:var(--blue)}
-.calc-result{background:var(--black);border-radius:4px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-top:8px}
-.calc-result-label{font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-light)}
-.calc-result-price{font-family:'Oswald',sans-serif;font-weight:700;font-size:48px;color:var(--gold);line-height:1}
-.calc-result-note{font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px}
-.calc-disclaimer{font-size:12px;color:var(--gray-light);margin-top:16px;line-height:1.6}
-.calc-cta{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.calc-cta p{font-size:13px;color:var(--gray)}
+/// Pricing calculator
+var rates={basic:{rate:0.85,name:'Basic Protection'},premium:{rate:1.25,name:'Premium Protection (Most Popular)'},decorative:{rate:2.00,name:'Decorative / Wet Look'},pool:{rate:2.00,name:'Pool Salt Shield'},foundation:{rate:0.70,name:'Foundation Waterproofing'}};
+function calcEstimate(){
+  var sqft=parseFloat(document.getElementById('calcSqft').value)||0;
+  var svc=document.getElementById('calcService').value;
+  var res=document.getElementById('calcResult');
+  if(sqft>0&&svc&&rates[svc]){
+    var r=rates[svc];
+    var low=Math.round(sqft*r.rate);
+    document.getElementById('calcPrice').textContent='$'+low.toLocaleString();
+    document.getElementById('calcNote').textContent='Based on '+sqft.toLocaleString()+' sq ft × $'+r.rate+'/sq ft starting rate';
+    document.getElementById('calcPkgName').textContent=r.name;
+    res.style.display='flex';
+  } else {
+    res.style.display='none';
+  }
+}
 
 /* ---- BOOKING ---- */
 .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
