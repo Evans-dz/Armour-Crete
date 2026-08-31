@@ -260,8 +260,9 @@ photography Armour Crete does not yet have, and drawn imagery is precisely what 
 trade site read as templated. This hero cannot look cheap and cannot age. When real
 photos arrive they go *below* the fold and the hero never changes.
 
-`src/pages/hero-options.astro` is kept for reference. **Delete it before launch** — it is
-a routable page.
+`src/pages/hero-options.astro` was deleted 2026-08-31 once the direction was settled. The
+four alternatives it held are described above; recover it from git history
+(commit 07d2cf1) if the decision is ever revisited.
 
 **Palette:** Washington County sandstone and basalt — bone `#f4f0e9`, sand `#ddd4c6`,
 warm ink `#171513`, stone `#6e655b`, one red-rock clay accent `#9e4a2c` used sparingly.
@@ -375,7 +376,6 @@ a site visit is a guess, and points at the free assessment.
 - One phone number on the site or both.
 - **Mobile nav menu** — still the biggest structural gap; nav collapses to logo + CTA.
 - Form still composes a `mailto:` and needs real wiring.
-- `src/pages/hero-options.astro` must be deleted before launch.
 
 ---
 
@@ -466,7 +466,6 @@ materials section copy, and the footer. Do not bury it.
 - One phone number on the site or both.
 - **Mobile nav menu** — still the biggest structural gap.
 - Form still composes a `mailto:` and needs real wiring.
-- `src/pages/hero-options.astro` must be deleted before launch.
 
 ---
 
@@ -532,7 +531,6 @@ restart. Worth knowing before chasing a phantom CSS bug.
 - Cure time before new flatwork can be sealed.
 - Warranty terms per package.
 - The foundation waterproofing sequence for the builder/GC track.
-- `src/pages/hero-options.astro` must be deleted before launch.
 - Real photography — 95 stills and 49 clips sit unused in `reference/`.
 - Nothing is committed; the repo still has zero commits.
 
@@ -616,6 +614,5 @@ Ranking locally is mostly off-page. In rough order of impact:
 - Business street address for the schema.
 - Reseal interval per product; cure time before sealing new flatwork; warranty terms.
 - Foundation waterproofing sequence for the builder track.
-- Delete `src/pages/hero-options.astro` before launch.
 - Form needs its one-time FormSubmit activation.
 - Nothing committed; repo still has zero commits.
