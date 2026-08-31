@@ -1,0 +1,337 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Beads for the water option — x, y, radius
+const beads = [
+  [120, 96, 27], [214, 62, 15], [286, 132, 34], [92, 210, 19], [178, 178, 12],
+  [356, 74, 20], [430, 148, 26], [268, 246, 16], [372, 232, 11], [508, 96, 31],
+  [560, 196, 18], [462, 292, 22], [148, 306, 14], [340, 340, 28], [604, 122, 13],
+  [656, 252, 24], [232, 396, 19], [418, 424, 15], [548, 372, 30], [96, 412, 12],
+  [700, 176, 17], [618, 428, 21], [312, 462, 13], [500, 486, 18], [688, 352, 14],
+];
+---
+
+<Base title="Armour Crete — hero options">
+  <div class="opts">
+    <header class="opts-head">
+      <p class="eyebrow">Armour Crete · pick one</p>
+      <h1 class="display opts-h">Four hero directions.</h1>
+      <p class="lede">
+        Same headline and layout in each, so the only thing changing is the visual.
+        None of them use a photograph. Tell me a number.
+      </p>
+    </header>
+
+    <!-- ============== 1 · WATER ON A SEALED SLAB ============== -->
+    <section class="opt">
+      <div class="opt-tag"><span class="num">01</span> Water on a sealed slab</div>
+      <div class="opt-row">
+        <div class="opt-copy">
+          <p class="eyebrow">St. George · Washington County</p>
+          <h2 class="display opt-hh">Sealed against<br />the desert.</h2>
+          <p class="lede">
+            Concrete sealing, decorative finishes and foundation waterproofing for
+            homes and builders across southern Utah.
+          </p>
+          <div class="opt-cta">
+            <span class="btn btn-primary">Request an assessment</span>
+            <span class="btn btn-quiet">How it works</span>
+          </div>
+        </div>
+
+        <figure class="fig">
+          <svg viewBox="0 0 800 574" preserveAspectRatio="xMidYMid slice" role="img"
+               aria-label="Water beading on a freshly sealed concrete surface">
+            <defs>
+              <linearGradient id="wSlab" x1="0" y1="0" x2="0.3" y2="1">
+                <stop offset="0" stop-color="#413931" />
+                <stop offset="0.5" stop-color="#2b2621" />
+                <stop offset="1" stop-color="#1d1a16" />
+              </linearGradient>
+              <radialGradient id="wRake" cx="0.24" cy="0.1" r="0.9">
+                <stop offset="0" stop-color="rgba(255,240,214,0.2)" />
+                <stop offset="1" stop-color="rgba(255,240,214,0)" />
+              </radialGradient>
+              <!-- Water on a dark slab is mostly transparent: a dim body, a bright
+                   refracted rim, one sharp specular. Not a shiny sphere. -->
+              <radialGradient id="bead" cx="0.36" cy="0.34" r="0.8">
+                <stop offset="0" stop-color="rgba(255,250,240,0.20)" />
+                <stop offset="0.42" stop-color="rgba(150,140,126,0.10)" />
+                <stop offset="0.78" stop-color="rgba(255,255,255,0.04)" />
+                <stop offset="0.93" stop-color="rgba(255,248,232,0.30)" />
+                <stop offset="1" stop-color="rgba(255,248,232,0.06)" />
+              </radialGradient>
+              <filter id="grainF">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" />
+                <feColorMatrix type="saturate" values="0" />
+              </filter>
+              <filter id="soft"><feGaussianBlur stdDeviation="7" /></filter>
+            </defs>
+
+            <rect width="800" height="574" fill="url(#wSlab)" />
+            <rect width="800" height="574" filter="url(#grainF)" opacity="0.13" />
+            <rect width="800" height="574" fill="url(#wRake)" />
+
+            {beads.map(([x, y, r]) => (
+              <g class="bd">
+                <ellipse cx={x + r * 0.14} cy={y + r * 0.5} rx={r * 0.9} ry={r * 0.5}
+                         fill="rgba(0,0,0,0.5)" filter="url(#soft)" />
+                <ellipse cx={x} cy={y} rx={r} ry={r * 0.84} fill="url(#bead)" />
+                <path d={`M ${x - r * 0.72} ${y + r * 0.22} A ${r * 0.86} ${r * 0.7} 0 0 0 ${x + r * 0.68} ${y + r * 0.3}`}
+                      fill="none" stroke="rgba(255,248,232,0.4)" stroke-width={Math.max(1, r * 0.1)}
+                      stroke-linecap="round" />
+                <ellipse cx={x - r * 0.34} cy={y - r * 0.4} rx={r * 0.2} ry={r * 0.12}
+                         fill="rgba(255,255,255,0.85)" transform={`rotate(-30 ${x} ${y})`} />
+              </g>
+            ))}
+          </svg>
+        </figure>
+      </div>
+      <p class="opt-why">
+        The universal proof that a sealer is working. Macro, tactile, expensive-looking —
+        and it says the thing the customer cares about without a word.
+      </p>
+    </section>
+
+    <!-- ============== 2 · ARCHITECT'S DRAWING ============== -->
+    <section class="opt">
+      <div class="opt-tag"><span class="num">02</span> Architect's drawing</div>
+      <div class="opt-row">
+        <div class="opt-copy">
+          <p class="eyebrow">St. George · Washington County</p>
+          <h2 class="display opt-hh">Sealed against<br />the desert.</h2>
+          <p class="lede">
+            Concrete sealing, decorative finishes and foundation waterproofing for
+            homes and builders across southern Utah.
+          </p>
+          <div class="opt-cta">
+            <span class="btn btn-primary">Request an assessment</span>
+            <span class="btn btn-quiet">How it works</span>
+          </div>
+        </div>
+
+        <figure class="fig fig-light">
+          <svg viewBox="0 0 800 574" preserveAspectRatio="xMidYMid meet" role="img"
+               aria-label="Line drawing of a desert modern home showing the sealed concrete surfaces">
+            <rect width="800" height="574" fill="#efe9df" />
+            <g stroke="rgba(23,21,19,0.1)" stroke-width="1">
+              {[...Array(15)].map((_, i) => <line x1="0" y1={i * 40} x2="800" y2={i * 40} />)}
+              {[...Array(21)].map((_, i) => <line x1={i * 40} y1="0" x2={i * 40} y2="574" />)}
+            </g>
+
+            <!-- sealed surfaces, filled -->
+            <polygon points="130,392 500,392 660,506 40,506" fill="#cfc4b3" />
+            <polygon points="512,330 660,330 720,392 560,392" fill="#cfc4b3" />
+
+            <!-- house -->
+            <g fill="#e4dccf" stroke="rgba(23,21,19,0.55)" stroke-width="1.4" stroke-linejoin="round">
+              <polygon points="150,180 470,180 470,392 150,392" />
+              <polygon points="470,214 640,214 640,392 470,392" />
+              <polygon points="132,168 488,168 488,182 132,182" fill="#d6ccbb" />
+              <polygon points="456,204 656,204 656,216 456,216" fill="#d6ccbb" />
+            </g>
+            <g fill="#8d8577" stroke="rgba(23,21,19,0.5)" stroke-width="1.2">
+              <rect x="182" y="216" width="106" height="140" />
+              <rect x="308" y="216" width="66" height="140" />
+              <rect x="500" y="248" width="112" height="108" />
+            </g>
+            <g stroke="rgba(23,21,19,0.5)" stroke-width="1.2" fill="none">
+              <rect x="394" y="252" width="52" height="140" />
+            </g>
+
+            <!-- dimension line + annotation -->
+            <g stroke="rgba(23,21,19,0.42)" stroke-width="1">
+              <line x1="40" y1="534" x2="660" y2="534" />
+              <line x1="40" y1="526" x2="40" y2="542" />
+              <line x1="660" y1="526" x2="660" y2="542" />
+            </g>
+            <text x="350" y="556" text-anchor="middle" font-family="ui-monospace, monospace"
+                  font-size="13" letter-spacing="1.5" fill="rgba(23,21,19,0.5)">SEALED SURFACE</text>
+            <g stroke="rgba(158,74,44,0.75)" stroke-width="1.2" fill="none">
+              <line x1="300" y1="440" x2="300" y2="392" />
+              <circle cx="300" cy="440" r="4" fill="rgba(158,74,44,0.75)" />
+            </g>
+            <text x="316" y="446" font-family="ui-monospace, monospace" font-size="12"
+                  letter-spacing="1" fill="rgba(158,74,44,0.9)">DECO 20 CLEAR</text>
+          </svg>
+        </figure>
+      </div>
+      <p class="opt-why">
+        Reads like a drawing set from an architecture practice. Signals that you work with
+        builders and designers, not just homeowners — which fits selling all four markets.
+      </p>
+    </section>
+
+    <!-- ============== 3 · NO IMAGE AT ALL ============== -->
+    <section class="opt">
+      <div class="opt-tag"><span class="num">03</span> No image at all</div>
+      <div class="opt-typo">
+        <p class="eyebrow">St. George · Kayenta · Entrada · Ivins · Snow Canyon</p>
+        <h2 class="display typo-h">Sealed against<br />the desert.</h2>
+        <div class="typo-rule"></div>
+        <div class="typo-grid">
+          <div>
+            <p class="lede">
+              Concrete sealing, decorative finishes and foundation waterproofing for homes
+              and builders across southern Utah.
+            </p>
+            <div class="opt-cta">
+              <span class="btn btn-primary">Request an assessment</span>
+              <span class="btn btn-quiet">How it works</span>
+            </div>
+          </div>
+          <dl class="typo-facts">
+            <div><dt class="num">24h</dt><dd>Before you walk or drive on it</dd></div>
+            <div><dt class="num">6</dt><dd>Deco product lines, nothing else</dd></div>
+            <div><dt class="num">All</dt><dd>Of Utah, based in St. George</dd></div>
+          </dl>
+        </div>
+      </div>
+      <p class="opt-why">
+        The most expensive-looking option, and the only one that cannot age badly. Top
+        architecture and design firms do exactly this. It also means nothing to replace
+        when your real photos arrive — they just go further down the page.
+      </p>
+    </section>
+
+    <!-- ============== 4 · POOL DECK ============== -->
+    <section class="opt">
+      <div class="opt-tag"><span class="num">04</span> Pool deck at dusk</div>
+      <div class="opt-row">
+        <div class="opt-copy">
+          <p class="eyebrow">St. George · Washington County</p>
+          <h2 class="display opt-hh">Sealed against<br />the desert.</h2>
+          <p class="lede">
+            Concrete sealing, decorative finishes and foundation waterproofing for
+            homes and builders across southern Utah.
+          </p>
+          <div class="opt-cta">
+            <span class="btn btn-primary">Request an assessment</span>
+            <span class="btn btn-quiet">How it works</span>
+          </div>
+        </div>
+
+        <figure class="fig">
+          <svg viewBox="0 0 800 574" preserveAspectRatio="xMidYMid slice" role="img"
+               aria-label="A pool deck and pool at dusk, the sealed deck holding the light">
+            <defs>
+              <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#c9a882" />
+                <stop offset="0.55" stop-color="#b98f6c" />
+                <stop offset="1" stop-color="#8f6a52" />
+              </linearGradient>
+              <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5d5348" />
+                <stop offset="1" stop-color="#332d27" />
+              </linearGradient>
+              <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5c6f70" />
+                <stop offset="1" stop-color="#33474d" />
+              </linearGradient>
+              <linearGradient id="mesa" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#8d5540" />
+                <stop offset="1" stop-color="#6d4232" />
+              </linearGradient>
+              <filter id="grainG">
+                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" />
+                <feColorMatrix type="saturate" values="0" />
+              </filter>
+            </defs>
+
+            <rect width="800" height="574" fill="url(#dusk)" />
+            <circle cx="596" cy="196" r="46" fill="#f0d8b4" opacity="0.85" />
+
+            <!-- red rock horizon -->
+            <polygon points="0,238 96,196 190,214 268,180 372,206 468,178 560,208 668,186 800,212 800,278 0,278"
+                     fill="url(#mesa)" />
+            <polygon points="0,262 132,244 262,258 396,240 528,260 660,242 800,258 800,290 0,290"
+                     fill="rgba(23,21,19,0.22)" />
+
+            <!-- deck -->
+            <rect x="0" y="278" width="800" height="296" fill="url(#deck)" />
+
+            <!-- pool -->
+            <polygon points="176,336 632,336 720,506 88,506" fill="#241f1c" />
+            <polygon points="186,344 622,344 706,498 102,498" fill="url(#water)" />
+            <g stroke="rgba(255,255,255,0.16)" stroke-width="2" fill="none">
+              <line x1="214" y1="380" x2="596" y2="380" />
+              <line x1="196" y1="424" x2="618" y2="424" />
+              <line x1="172" y1="466" x2="646" y2="466" />
+            </g>
+            <polygon points="186,344 622,344 706,498 102,498" fill="rgba(240,216,180,0.1)" />
+
+            <!-- coping -->
+            <g fill="#a1948220">
+              <polygon points="176,336 632,336 636,346 172,346" fill="rgba(233,222,203,0.5)" />
+            </g>
+
+            <!-- the deck holds the light: sheen band -->
+            <polygon points="0,290 800,290 800,330 0,330" fill="rgba(240,216,180,0.09)" />
+            <ellipse cx="596" cy="300" rx="230" ry="26" fill="rgba(240,216,180,0.12)" />
+
+            <!-- loungers -->
+            <g fill="#211d1a">
+              <polygon points="86,300 140,300 132,332 78,332" />
+              <polygon points="86,300 106,278 118,280 140,300" />
+              <polygon points="676,306 730,306 738,338 684,338" />
+              <polygon points="676,306 698,284 710,286 730,306" />
+            </g>
+
+            <rect width="800" height="574" filter="url(#grainG)" opacity="0.1" />
+          </svg>
+        </figure>
+      </div>
+      <p class="opt-why">
+        The most literally "St. George money" of the four — pool decks are the job
+        wealthy homeowners actually book, and red rock at dusk places you instantly.
+      </p>
+    </section>
+  </div>
+
+  <style>
+    .opts { max-width: 1180px; margin: 0 auto; padding: clamp(3rem, 8vh, 6rem) var(--pad) 6rem; }
+    .opts-head { margin-bottom: clamp(3rem, 8vh, 5rem); }
+    .opts-h { font-size: clamp(2.2rem, 5vw, 3.6rem); margin: 0.6rem 0 1.1rem; }
+
+    .opt { padding-block: clamp(2.5rem, 6vh, 4rem); border-top: 1px solid var(--line); }
+    .opt-tag {
+      display: inline-flex; align-items: baseline; gap: 0.6rem;
+      font-size: 0.82rem; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--stone); margin-bottom: 1.8rem;
+    }
+    .opt-tag .num { color: var(--clay); font-size: 0.9rem; }
+
+    .opt-row { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+    .opt-hh { font-size: clamp(2rem, 4.2vw, 3.4rem); margin: 0.6rem 0 1.1rem; }
+    .opt-cta { display: flex; gap: 0.6rem; margin-top: 1.6rem; flex-wrap: wrap; }
+    .opt-cta .btn { cursor: default; }
+
+    .fig {
+      aspect-ratio: 3 / 2.15; border-radius: 4px; overflow: hidden;
+      box-shadow: 0 26px 60px -30px rgba(23, 21, 19, 0.55);
+      background: var(--ink);
+    }
+    .fig-light { background: #efe9df; }
+    .fig svg { width: 100%; height: 100%; display: block; }
+
+    .opt-why {
+      margin-top: 1.6rem; font-size: 0.92rem; color: var(--stone);
+      max-width: 62ch; padding-left: 1rem; border-left: 2px solid var(--clay);
+    }
+
+    /* option 3 */
+    .opt-typo { padding-block: clamp(1rem, 3vh, 2rem); }
+    .typo-h { font-size: clamp(3rem, 8.5vw, 7rem); margin: 1rem 0 0; }
+    .typo-rule { height: 1px; background: var(--line); margin: clamp(2rem, 5vh, 3.2rem) 0; }
+    .typo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+    .typo-facts { display: grid; gap: 1rem; }
+    .typo-facts > div { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; align-items: baseline; border-bottom: 1px solid var(--line-soft); padding-bottom: 1rem; }
+    .typo-facts dt { font-size: 1.35rem; color: var(--clay); font-weight: 500; }
+    .typo-facts dd { font-size: 0.9rem; color: var(--stone); }
+
+    @media (max-width: 900px) {
+      .opt-row, .typo-grid { grid-template-columns: 1fr; }
+      .fig { order: -1; }
+    }
+  </style>
+</Base>

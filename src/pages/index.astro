@@ -1,0 +1,1049 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const services = [
+  {
+    n: '01',
+    t: 'Concrete sealing',
+    d: 'Driveways, patios, walkways and garage floors — protected against UV, salt and staining.',
+  },
+  {
+    n: '02',
+    t: 'Decorative & wet-look',
+    d: 'Colour-enhanced finishes that deepen the surface and hold it there.',
+  },
+  {
+    n: '03',
+    t: 'Pool decks & salt',
+    d: 'Salt-resistant systems for pool surrounds and the slabs that live next to them.',
+  },
+  {
+    n: '04',
+    t: 'Foundation waterproofing',
+    d: 'Below-grade protection for new construction, scheduled to your build calendar.',
+  },
+  {
+    n: '05',
+    t: 'Damp proofing',
+    d: 'Moisture control on foundation walls before backfill goes in.',
+  },
+  {
+    n: '06',
+    t: 'Crack repair & restoration',
+    d: 'Filling, patching and surface correction — before any sealer goes down.',
+  },
+  {
+    n: '07',
+    t: 'Expansion joints',
+    d: 'Failed joint filler lets water straight down into the sub-base. We cut the old material out, clean the channel and re-fill it so the slab can move without letting anything in.',
+  },
+  {
+    n: '08',
+    t: 'Asphalt & blacktop sealing',
+    d: 'Sealed and conditioned with a natural-oil product containing no asphalt and no tar — old blacktop is restored rather than painted over.',
+  },
+];
+
+const steps = [
+  { n: '01', t: 'Clean', d: 'The slab gets cleaned end to end. Nothing goes down over dirt.' },
+  { n: '02', t: 'Dry', d: 'We wait for it to dry completely. Sealer over moisture is how finishes fail.' },
+  { n: '03', t: 'Seal', d: 'Deco product, matched to the surface and the exposure it lives in.' },
+  { n: '04', t: 'Cure', d: 'Twenty-four hours before you walk or drive on it. Then it is yours again.' },
+];
+
+const products = [
+  'DECO 20 Clear Finish',
+  'Salt Shield 303',
+  'SilaCast BES',
+  'Shine-A-Cast',
+  'TravaCast',
+  'Bio Blacktop',
+];
+
+const areas = [
+  'St. George', 'Kayenta', 'Entrada', 'Ivins', 'Santa Clara', 'Snow Canyon',
+  'SunRiver', 'Coral Canyon', 'Green Springs', 'Bloomington', 'Washington', 'Hurricane',
+];
+
+const SITE = 'https://www.armour-crete.com';
+
+// FAQ answers are pulled straight from the rendered copy so the structured
+// data can never drift from what a visitor actually reads — Google treats a
+// mismatch as a violation.
+const faq = [
+  ['How long before I can walk or drive on it?',
+   'Twenty-four hours. Plan for one day without the surface.'],
+  ['How often does concrete sealing need doing again?',
+   'It depends more on which product is on it than on elapsed time. Penetrating sealers such as DECO 20, Salt Shield 303 and SilaCast soak into the slab and last considerably longer. Topical finishes sit on the surface as a film, and films wear, so they come round more often. Exposure matters too — a shaded patio and a west-facing driveway do not wear at the same rate.'],
+  ['Will a concrete sealer make the surface slippery?',
+   'Not with the product used on pool decks. Salt Shield 303 is a penetrating sealer that dries clear with no film, and the manufacturer states it does not change the skid or slip resistance of the surface. High-shine finishes do leave a surface layer, so those are discussed at the assessment.'],
+  ['Will sealing change the colour of my concrete?',
+   'That depends on the finish. A clear sealer protects without changing much. Wet-look and decorative finishes deliberately deepen colour and lift the aggregate. We show you the difference on your own concrete first.'],
+  ['Can you seal brand-new concrete?',
+   'Not immediately. Fresh concrete has to cure and give up its moisture first. If you are mid build, talk to us at the pour and we will schedule it properly.'],
+  ['What about pool decks and salt damage?',
+   'Salt Shield 303 is made for it. Salt dissolves in water, soaks into the pores, then crystallises as the water evaporates, and crystals growing inside a confined pore push hard enough to break the surface from the inside. Water-softener discharge does the same to the slab it drains onto.'],
+  ['Do you work with builders on new construction?',
+   'Yes. Foundation waterproofing and damp proofing are scheduled to the build calendar, plus HOA, commercial and municipal flatwork.'],
+  ['Do you work outside St. George?',
+   'We are based in St. George and most work is in Washington County — Kayenta, Entrada, Ivins, Santa Clara, Snow Canyon, SunRiver, Coral Canyon, Washington and Hurricane. We are available statewide.'],
+  ['What does concrete sealing cost?',
+   'It depends on the surface, its condition, the prep needed and the finish you want. The on-site assessment is free and carries no obligation.'],
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
+      '@id': SITE + '/#business',
+      name: 'Armour Crete',
+      description:
+        'Concrete sealing, decorative and wet-look finishes, pool deck salt protection, expansion joints, asphalt sealing and foundation waterproofing in St. George and Washington County, Utah.',
+      url: SITE,
+      telephone: '+1-435-994-5235',
+      email: 'evans@armour-crete.com',
+      image: SITE + '/og.png',
+      logo: SITE + '/logo.png',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'St. George',
+        addressRegion: 'UT',
+        addressCountry: 'US',
+      },
+      areaServed: [
+        ...areas.map((a) => ({ '@type': 'City', name: a + ', UT' })),
+        { '@type': 'State', name: 'Utah' },
+      ],
+      knowsAbout: [
+        'concrete sealing', 'driveway sealing', 'pool deck sealing',
+        'foundation waterproofing', 'damp proofing', 'expansion joint repair',
+        'paver sealing', 'travertine sealing', 'asphalt sealing',
+        'decorative concrete', 'wet look sealer', 'salt damage', 'concrete spalling',
+      ],
+      sameAs: ['https://g.page/r/CTRFIPJaX9QCEAI'],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Concrete protection services',
+        itemListElement: services.map((sv) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: sv.t, description: sv.d },
+        })),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': SITE + '/#website',
+      url: SITE,
+      name: 'Armour Crete',
+      publisher: { '@id': SITE + '/#business' },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': SITE + '/#faq',
+      mainEntity: faq.map(([q, a]) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Base
+  title="Concrete Sealing & Driveway Sealer | St. George, UT | Armour Crete"
+  description="Concrete sealing, wet-look finishes, pool deck salt protection, expansion joints and foundation waterproofing in St. George and Washington County, Utah. Certified Deco applicator. Free on-site assessment."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+  <SiteNav />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow rv">St. George · Kayenta · Entrada · Ivins · Snow Canyon</p>
+        <h1 class="display hero-h rv">Sealed against<br />the desert.</h1>
+        <div class="hero-rule rv"></div>
+
+        <div class="hero-grid">
+          <div class="rv">
+            <p class="lede">
+              Concrete sealing, decorative finishes and foundation waterproofing for
+              homes and builders across southern Utah.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#assessment">Request an assessment</a>
+              <a class="btn btn-quiet" href="#process">How it works</a>
+            </div>
+            <p class="hero-note">Licensed &amp; insured · Certified Deco applicator · Free on-site assessment</p>
+          </div>
+
+          <dl class="facts rv">
+            <div><dt class="num">24h</dt><dd>Before you walk or drive on it</dd></div>
+            <div><dt class="num">6</dt><dd>Deco product lines, nothing else</dd></div>
+            <div><dt class="num">All</dt><dd>Of Utah, based in St. George</dd></div>
+            <div><dt class="num">✓</dt><dd>Certified Deco applicator</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section id="services" class="sec">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <p class="eyebrow">Concrete services · St. George, Utah</p>
+          <h2 class="display sec-h">Every way concrete fails here.<br />We handle all of them.</h2>
+        </div>
+
+        <ul class="svc">
+          {services.map((s) => (
+            <li class="svc-i rv">
+              <span class="num svc-n">{s.n}</span>
+              <h3 class="svc-t">{s.t}</h3>
+              <p class="svc-d">{s.d}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ WHY ============ -->
+    <section id="why" class="sec">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <p class="eyebrow">Why concrete fails in southern Utah</p>
+          <h2 class="display sec-h">Concrete does not crack<br />because it is weak.</h2>
+        </div>
+
+        <ol class="mech">
+          <li class="mech-i rv">
+            <span class="num mech-n">01</span>
+            <h3 class="mech-t">It moves.</h3>
+            <p class="mech-d">
+              Concrete expands and contracts with temperature — roughly 5.5 millionths
+              of an inch, per inch, per degree Fahrenheit. Swing a 50-foot driveway
+              100°F between a January night and a July afternoon and that is about a
+              third of an inch of movement. The slab is pinned by the ground under it
+              and whatever it butts against, so the movement turns into stress, and
+              stress opens hairline cracks. Control joints exist to choose where.
+            </p>
+          </li>
+          <li class="mech-i rv">
+            <span class="num mech-n">02</span>
+            <h3 class="mech-t">It drinks.</h3>
+            <p class="mech-d">
+              Concrete is porous. Water wicks into the capillary pores and down into
+              every crack the movement just opened — and it carries whatever is
+              dissolved in it. Salt off the pool. Salt out of the softener. Salt
+              already in the soil and the hard water it came from.
+            </p>
+          </li>
+          <li class="mech-i rv">
+            <span class="num mech-n">03</span>
+            <h3 class="mech-t">Then it breaks from the inside.</h3>
+            <p class="mech-d">
+              Water expands about nine percent when it freezes, and southern Utah
+              nights do drop below freezing. A saturated pore has nowhere to put
+              that. Salt does the same job without needing the cold — as water
+              evaporates the salt crystallises, and crystals growing inside a
+              confined pore push hard enough to lift the surface off. Scaling,
+              spalling, and the white bloom of efflorescence are all the same story.
+            </p>
+          </li>
+        </ol>
+
+        <aside class="claim rv">
+          <p class="claim-k display">Sealing does not stop concrete moving.</p>
+          <p class="claim-d">
+            Nothing does. What it stops is water being there to take advantage of the
+            movement. Keep the pore network from staying saturated and you starve both
+            freeze–thaw and salt crystallisation of the one thing they need. Movement
+            on its own is just movement.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section id="process" class="sec sec-dark">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <p class="eyebrow eyebrow-lt">Our concrete sealing process</p>
+          <h2 class="display sec-h">Four steps. No shortcuts<br />in any of them.</h2>
+        </div>
+
+        <ol class="steps">
+          {steps.map((s) => (
+            <li class="step rv">
+              <span class="num step-n">{s.n}</span>
+              <h3 class="step-t">{s.t}</h3>
+              <p class="step-d">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+
+        <aside class="cure rv">
+          <p class="cure-k display"><span class="num">24</span> hours</p>
+          <p class="cure-d">
+            That is the honest answer to the question everyone actually asks — how long
+            am I without my driveway. One day. We would rather tell you up front than
+            have you find out on the way to work.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ MATERIALS ============ -->
+    <section id="materials" class="sec">
+      <div class="wrap mat-in">
+        <div class="mat-copy rv">
+          <p class="eyebrow">Materials</p>
+          <h2 class="display sec-h">We only use<br />Deco products.</h2>
+          <p class="lede">
+            Deco Products has manufactured in Denver since 1991, water-based and
+            solvent-free from the start. We are a certified Deco applicator — which is
+            what lets us put down the restricted products, including the ICC-approved
+            foundation membrane. No house-brand substitutions, no whatever was on the
+            truck.
+          </p>
+          <a class="path-link mat-link" href="/products">What each one does →</a>
+        </div>
+
+        <ul class="prods rv">
+          {products.map((p) => (
+            <li class="prod"><span class="num">{p}</span></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ MAINTENANCE ============ -->
+    <section id="care" class="sec sec-dark">
+      <div class="wrap care-in">
+        <div class="care-copy rv">
+          <p class="eyebrow eyebrow-lt">Concrete sealing maintenance</p>
+          <h2 class="display sec-h">We come back<br />every two years.</h2>
+          <p class="lede lede-lt">
+            Sealer is not permanent. It wears where you drive on it and weathers where
+            the sun hits it, and most people only notice once the surface has already
+            started to go — by which point the fix is bigger than a reseal.
+          </p>
+          <p class="lede lede-lt">
+            So we offer a standing arrangement instead. We come back on a two-year
+            cycle, clean it, and put a fresh coat down. You do not book it and you do
+            not think about it, and the slab never gets far enough gone to need
+            restoring. Where a product genuinely lasts longer than that, we will tell
+            you and set the cycle to match it.
+          </p>
+          <a class="btn btn-send" href="#assessment">Ask about the maintenance program</a>
+        </div>
+
+        <ul class="care-list rv">
+          <li><span class="num">01</span> Scheduled by us, on a two-year cycle</li>
+          <li><span class="num">02</span> Same product, same finish, no surprises</li>
+          <li><span class="num">03</span> Priority on the calendar</li>
+          <li><span class="num">04</span> Stop whenever you like</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ TWO PATHS ============ -->
+    <section class="sec sec-tight">
+      <div class="wrap paths">
+        <article class="path rv">
+          <p class="eyebrow">Homeowners</p>
+          <h3 class="path-t display">Driveways, patios,<br />pool decks.</h3>
+          <p class="path-d">
+            A private assessment on site, a clear scope, and a finish chosen for how your
+            property actually gets used.
+          </p>
+          <a class="path-link" href="#assessment">Request an assessment →</a>
+        </article>
+
+        <article class="path rv">
+          <p class="eyebrow">Builders &amp; commercial</p>
+          <h3 class="path-t display">Waterproofing,<br />on your calendar.</h3>
+          <p class="path-d">
+            Foundation waterproofing and damp proofing for new construction, plus HOA,
+            commercial and municipal flatwork. We work to the build schedule.
+          </p>
+          <a class="path-link" href="/products">Foundation waterproofing materials →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ SERVICE AREA ============ -->
+    <section id="area" class="sec">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <p class="eyebrow">Concrete sealing service area</p>
+          <h2 class="display sec-h">Based in St. George.<br />Available statewide.</h2>
+        </div>
+        <ul class="areas rv">
+          {areas.map((a) => <li>{a}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="sec">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <p class="eyebrow">Concrete sealing questions</p>
+          <h2 class="display sec-h">The things people<br />actually ask.</h2>
+        </div>
+
+        <div class="faq rv">
+          <details class="qa">
+            <summary>How long before I can walk or drive on it?</summary>
+            <div class="qa-b"><p>
+              Twenty-four hours. That is the real number, and we would rather you had it
+              up front than found out on the way to work. Plan for one day without the
+              surface and you will not be caught out.
+            </p></div>
+          </details>
+
+          <details class="qa">
+            <summary>How often does it need doing again?</summary>
+            <div class="qa-b"><p>
+              It depends on the product and how hard the surface gets used — a shaded
+              patio and a west-facing driveway do not wear at anything like the same
+              rate. Our maintenance program runs on a two-year cycle, and if you would
+              rather just call us when it looks tired, that is fine too.
+            </p>
+            <p class="qa-confirm"><span>Awaiting Dylan</span> The real reseal interval for each of the six products.</p>
+            </div>
+          </details>
+
+          <details class="qa">
+            <summary>Will it make the surface slippery?</summary>
+            <div class="qa-b"><p>
+              Not with the product we use on pool decks. Salt Shield 303 is a penetrating
+              sealer — it soaks into the concrete and dries clear with no film on top —
+              and the manufacturer states plainly that it does not change the skid or
+              slip resistance of the surface.
+            </p>
+            <p>
+              The high-shine finishes are a different conversation, because those do leave
+              a layer on the surface. If you want a wet look somewhere that gets walked on
+              barefoot and wet, say so at the assessment and we will talk it through
+              rather than just quoting it.
+            </p></div>
+          </details>
+
+          <details class="qa">
+            <summary>Will it change the colour?</summary>
+            <div class="qa-b"><p>
+              That depends which finish you choose, and it is a decision rather than a
+              side effect. A clear sealer protects without changing much. Wet-look and
+              decorative finishes deliberately deepen the colour and lift the aggregate
+              — that is the entire point of them. We will show you the difference on
+              your own concrete before anything is committed to.
+            </p></div>
+          </details>
+
+          <details class="qa">
+            <summary>Can you seal brand-new concrete?</summary>
+            <div class="qa-b"><p>
+              Not immediately. Fresh concrete has to cure and give up its moisture
+              first, and sealing over that is how finishes fail early. If you are mid
+              build, talk to us at the pour and we will schedule it properly.
+            </p>
+            <p class="qa-confirm"><span>Awaiting Dylan</span> The cure time you actually wait — commonly 28 days, but confirm.</p>
+            </div>
+          </details>
+
+          <details class="qa">
+            <summary>What about my pool deck and the salt?</summary>
+            <div class="qa-b"><p>
+              Salt Shield 303 exists for exactly this. Salt dissolves in water, soaks
+              into the pores, then crystallises as the water evaporates — and crystals
+              growing inside a confined pore push hard enough to break the surface from
+              the inside. Softener discharge does the same thing to the slab it drains
+              onto.
+            </p></div>
+          </details>
+
+          <details class="qa">
+            <summary>Do you work with builders?</summary>
+            <div class="qa-b"><p>
+              Yes. Foundation waterproofing and damp proofing on new construction get
+              scheduled to the build calendar rather than ours, plus HOA, commercial and
+              municipal flatwork.
+            </p></div>
+          </details>
+
+          <details class="qa">
+            <summary>Do you work outside St. George?</summary>
+            <div class="qa-b"><p>
+              We are based in St. George and most of our work is in Washington County —
+              Kayenta, Entrada, Ivins, Santa Clara, Snow Canyon, SunRiver, Coral Canyon,
+              Washington and Hurricane. We are available statewide.
+            </p></div>
+          </details>
+
+          <details class="qa">
+            <summary>What does it cost?</summary>
+            <div class="qa-b"><p>
+              It depends on the surface, its condition, how much prep it needs and the
+              finish you want, so any number quoted before someone has looked at it is a
+              guess. The on-site assessment is free and there is no obligation attached
+              to it.
+            </p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT ============ -->
+    <section id="assessment" class="sec sec-dark">
+      <div class="wrap ass-in">
+        <div class="ass-copy rv">
+          <p class="eyebrow eyebrow-lt">Get started</p>
+          <h2 class="display sec-h">Request an<br />assessment.</h2>
+          <p class="lede lede-lt">
+            We come out, look at the surface, and tell you what it needs. No charge for
+            the visit.
+          </p>
+
+          <dl class="ass-contact">
+            <div><dt>Dylan Evans</dt><dd><a class="num" href="tel:+14359945235">435·994·5235</a></dd></div>
+            <div><dt>Zac Evans</dt><dd><a class="num" href="tel:+14352246987">435·224·6987</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:evans@armour-crete.com">evans@armour-crete.com</a></dd></div>
+          </dl>
+        </div>
+
+        <form class="ass-form rv" id="acform">
+          <div class="f-row">
+            <label class="fld"><span>Name</span><input name="name" type="text" required /></label>
+            <label class="fld"><span>Phone</span><input name="phone" type="tel" required /></label>
+          </div>
+          <label class="fld"><span>Email</span><input name="email" type="email" required /></label>
+          <div class="f-row">
+            <label class="fld">
+              <span>Property</span>
+              <select name="property">
+                <option>Home</option>
+                <option>New construction</option>
+                <option>Commercial or HOA</option>
+                <option>Municipal</option>
+              </select>
+            </label>
+            <label class="fld">
+              <span>Surface</span>
+              <select name="surface">
+                <option>Driveway</option>
+                <option>Patio or walkway</option>
+                <option>Pool deck</option>
+                <option>Garage or basement floor</option>
+                <option>Foundation</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+          </div>
+          <label class="fld"><span>Address or area</span><input name="where" type="text" /></label>
+          <label class="fld"><span>Anything we should know</span><textarea name="notes" rows="3"></textarea></label>
+          <input type="text" name="_honey" class="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button class="btn btn-send" type="submit">Send request</button>
+          <p class="f-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div class="foot-brand">
+        <img src="/logo.png" alt="Armour Crete — concrete sealing and foundation protection, St. George, Utah" width="800" height="800" loading="lazy" />
+        <p class="foot-tag">Concrete &amp; foundation protection · Southern Utah</p>
+      </div>
+
+      <div class="foot-cols">
+        <div>
+          <p class="eyebrow eyebrow-lt">Contact</p>
+          <a class="num" href="tel:+14359945235">435·994·5235</a>
+          <a class="num" href="tel:+14352246987">435·224·6987</a>
+          <a href="mailto:evans@armour-crete.com">evans@armour-crete.com</a>
+        </div>
+        <div>
+          <p class="eyebrow eyebrow-lt">Company</p>
+          <span>Licensed &amp; insured</span>
+          <span>Certified Deco applicator</span>
+          <span>Deco products only</span>
+          <span>Free on-site assessment</span>
+        </div>
+      </div>
+    </div>
+    <div class="wrap foot-btm">
+      <span>© 2026 Armour Crete</span>
+      <span>St. George, Utah</span>
+    </div>
+  </footer>
+
+  <script is:inline>
+    // Reveal on scroll
+    (function () {
+      var els = document.querySelectorAll('.rv');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+      );
+      els.forEach(function (e, i) {
+        e.style.transitionDelay = (i % 6) * 60 + 'ms';
+        io.observe(e);
+      });
+    })();
+
+    // Nav condenses once you leave the hero
+    (function () {
+      var nav = document.querySelector('.nav');
+      var onScroll = function () {
+        nav.classList.toggle('stuck', window.scrollY > 40);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // Real submission. Posts to FormSubmit's AJAX endpoint, which forwards to
+    // evans@armour-crete.com. No account, no key — but the FIRST submission
+    // sends an activation link to that inbox that has to be clicked once.
+    // If the network call fails we fall back to opening the mail client so a
+    // lead is never silently swallowed.
+    (function () {
+      var f = document.getElementById('acform');
+      if (!f) return;
+
+      var ENDPOINT = 'https://formsubmit.co/ajax/evans@armour-crete.com';
+      var btn = f.querySelector('button[type=submit]');
+      var status = f.querySelector('.f-status');
+      var sending = false;
+
+      function say(msg, kind) {
+        status.textContent = msg;
+        status.className = 'f-status' + (kind ? ' is-' + kind : '');
+      }
+
+      function mailtoFallback(d) {
+        var body = [
+          'Name: ' + d.name, 'Phone: ' + d.phone, 'Email: ' + d.email,
+          'Property: ' + d.property, 'Surface: ' + d.surface,
+          'Address or area: ' + d.where, '', d.notes,
+        ].join('\n');
+        window.location.href =
+          'mailto:evans@armour-crete.com?subject=' +
+          encodeURIComponent('Assessment request — ' + d.name) +
+          '&body=' + encodeURIComponent(body);
+      }
+
+      f.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        if (sending) return;
+
+        if (!f.reportValidity()) return;
+
+        var fd = new FormData(f);
+        var d = {};
+        fd.forEach(function (v, k) { d[k] = (v || '').toString().trim(); });
+
+        // honeypot: bots fill hidden fields, people do not
+        if (d._honey) return;
+        delete d._honey;
+
+        d._subject = 'Assessment request — ' + (d.name || 'no name');
+        d._template = 'table';
+        d._captcha = 'false';
+
+        sending = true;
+        btn.disabled = true;
+        var label = btn.textContent;
+        btn.textContent = 'Sending…';
+        say('');
+
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(d),
+        })
+          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (res) {
+            if (!res.ok || String(res.j.success) === 'false') throw new Error('rejected');
+            f.reset();
+            say('Thank you — that came through. We will call you to arrange the visit.', 'ok');
+          })
+          .catch(function () {
+            say('That did not send. Opening your email instead — or call 435·994·5235.', 'err');
+            mailtoFallback(d);
+          })
+          .then(function () {
+            sending = false;
+            btn.disabled = false;
+            btn.textContent = label;
+          });
+      });
+    })();
+  </script>
+
+  <style>
+    /* ================= HERO ================= */
+    /* No image. Type, space, and three numbers do the work. */
+    .hero {
+      padding-top: clamp(8rem, 22vh, 15rem);
+      padding-bottom: clamp(3.5rem, 9vh, 6.5rem);
+    }
+    .hero-h {
+      font-size: clamp(3.1rem, 9.4vw, 7.6rem);
+      margin: 1rem 0 0;
+    }
+    .hero-rule {
+      height: 1px;
+      background: var(--line);
+      margin: clamp(2.2rem, 6vh, 3.6rem) 0 clamp(2rem, 5vh, 3rem);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: start;
+    }
+    .hero-cta { display: flex; gap: 0.7rem; margin-top: 1.9rem; flex-wrap: wrap; }
+    .hero-note {
+      margin-top: 1.35rem;
+      font-size: 0.84rem;
+      color: var(--stone-lt);
+      letter-spacing: 0.01em;
+    }
+
+    .facts { display: grid; gap: 0; }
+    .facts > div {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr;
+      gap: 1.25rem;
+      align-items: baseline;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .facts > div:first-child { border-top: 1px solid var(--line-soft); }
+    .facts dt {
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--clay);
+    }
+    .facts dd { font-size: 0.9rem; color: var(--stone); line-height: 1.5; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .facts > div { grid-template-columns: 5rem 1fr; }
+    }
+
+    /* ================= SECTIONS ================= */
+    .sec { padding: clamp(4.5rem, 12vh, 8.5rem) 0; }
+    .sec-tight { padding-block: clamp(3rem, 7vh, 5rem); }
+    .sec-head { margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+    .sec-h { font-size: clamp(1.9rem, 4vw, 3.15rem); margin-top: 0.75rem; }
+
+    .sec-dark {
+      background: var(--ink);
+      color: var(--bone);
+    }
+    .sec-dark .sec-h { color: var(--bone); }
+    .eyebrow-lt { color: var(--stone-lt); }
+    .lede-lt { color: rgba(244, 240, 233, 0.62); }
+
+    /* ================= SERVICES ================= */
+    .svc {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line-soft);
+      border-top: 1px solid var(--line-soft);
+    }
+    .svc-i {
+      background: var(--bone);
+      padding: 2rem 1.6rem 2.4rem;
+      transition: background 0.45s var(--ease), color 0.45s var(--ease);
+    }
+    .svc-i:hover { background: var(--ink); color: var(--bone); }
+    .svc-i:hover .svc-n { color: var(--clay-lt); }
+    .svc-i:hover .svc-d { color: rgba(244, 240, 233, 0.6); }
+    .svc-n { font-size: 0.76rem; color: var(--stone-lt); transition: color 0.45s var(--ease); }
+    .svc-t {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.32rem;
+      letter-spacing: -0.015em;
+      margin: 0.85rem 0 0.5rem;
+    }
+    .svc-d { font-size: 0.92rem; color: var(--stone); line-height: 1.55; transition: color 0.45s var(--ease); }
+
+    /* keep the final row full whether the count lands 1 or 2 short */
+    .svc-i:last-child:nth-child(3n + 1) { grid-column: span 3; }
+    .svc-i:last-child:nth-child(3n + 2) { grid-column: span 2; }
+    .svc-i:last-child:nth-child(3n + 1) .svc-d,
+    .svc-i:last-child:nth-child(3n + 2) .svc-d { max-width: 62ch; }
+
+    @media (max-width: 900px) {
+      .svc { grid-template-columns: 1fr; }
+      .svc-i:last-child:nth-child(3n + 1),
+      .svc-i:last-child:nth-child(3n + 2) { grid-column: auto; }
+    }
+
+    /* ================= PROCESS ================= */
+    .steps {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+    }
+    .step { border-top: 1px solid rgba(244, 240, 233, 0.16); padding-top: 1.25rem; }
+    .step-n { font-size: 0.76rem; color: var(--clay-lt); }
+    .step-t {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.5rem;
+      margin: 0.7rem 0 0.55rem;
+    }
+    .step-d { font-size: 0.92rem; color: rgba(244, 240, 233, 0.58); line-height: 1.58; }
+
+    .cure {
+      margin-top: clamp(3rem, 8vh, 5rem);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: center;
+      border-top: 1px solid rgba(244, 240, 233, 0.16);
+      padding-top: clamp(2rem, 5vh, 3rem);
+    }
+    .cure-k { font-size: clamp(2.6rem, 6vw, 4.4rem); color: var(--clay-lt); line-height: 1; }
+    .cure-k .num { font-family: var(--serif); }
+    .cure-d { color: rgba(244, 240, 233, 0.6); max-width: 54ch; font-size: 0.98rem; }
+
+    @media (max-width: 900px) {
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .cure { grid-template-columns: 1fr; }
+    }
+
+    /* ================= MATERIALS ================= */
+    .mat-in {
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .mat-copy .lede { margin-top: 1.35rem; }
+    .prods { list-style: none; display: grid; gap: 1px; background: var(--line-soft); border-block: 1px solid var(--line-soft); }
+    .prod {
+      background: var(--bone);
+      padding: 1.05rem 1.25rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+      transition: background 0.4s var(--ease), color 0.4s var(--ease), padding-left 0.4s var(--ease);
+    }
+    .prod:hover { background: var(--ink); color: var(--bone); padding-left: 1.75rem; }
+
+    @media (max-width: 900px) { .mat-in { grid-template-columns: 1fr; } }
+
+    /* ================= PATHS ================= */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-soft); border-block: 1px solid var(--line-soft); }
+    .path { background: var(--bone); padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 3vw, 2.75rem) clamp(2.25rem, 4vw, 3rem); }
+    .path-t { font-size: clamp(1.6rem, 2.9vw, 2.35rem); margin: 0.8rem 0 1rem; }
+    .path-d { color: var(--stone); font-size: 0.96rem; max-width: 40ch; }
+    .path-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--clay);
+      transition: gap 0.3s var(--ease), opacity 0.3s var(--ease);
+    }
+    .path-link:hover { opacity: 0.65; }
+
+    @media (max-width: 780px) { .paths { grid-template-columns: 1fr; } }
+
+    /* ================= AREAS ================= */
+    .areas {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem 0.5rem;
+      max-width: 62rem;
+    }
+    .areas li {
+      padding: 0.6em 1.15em;
+      border-radius: 999px;
+      background: var(--bone-2);
+      font-size: 0.92rem;
+      color: var(--ink);
+      transition: background 0.35s var(--ease), color 0.35s var(--ease);
+    }
+    .areas li:first-child { background: var(--ink); color: var(--bone); }
+    .areas li:hover { background: var(--sand); }
+    .areas li:first-child:hover { background: var(--clay); color: var(--bone); }
+
+    /* ================= ASSESSMENT ================= */
+    .ass-in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+    .ass-contact { margin-top: 2.5rem; display: grid; gap: 0.9rem; }
+    .ass-contact > div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(244, 240, 233, 0.14); padding-bottom: 0.9rem; max-width: 26rem; }
+    .ass-contact dt { font-size: 0.86rem; color: var(--stone-lt); }
+    .ass-contact dd a { font-size: 0.94rem; color: var(--bone); transition: color 0.3s var(--ease); }
+    .ass-contact dd a:hover { color: var(--clay-lt); }
+
+    .ass-form { display: grid; gap: 0.85rem; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .fld { display: grid; gap: 0.4rem; }
+    .fld > span { font-size: 0.8rem; color: var(--stone-lt); letter-spacing: 0.01em; }
+    .fld input, .fld select, .fld textarea {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--bone);
+      background: rgba(244, 240, 233, 0.07);
+      border: 0;
+      border-radius: 10px;
+      padding: 0.8em 0.95em;
+      width: 100%;
+      transition: background 0.3s var(--ease);
+    }
+    .fld textarea { resize: vertical; }
+    .fld input:focus, .fld select:focus, .fld textarea:focus {
+      outline: 0;
+      background: rgba(244, 240, 233, 0.13);
+    }
+    .fld select option { background: var(--ink-2); color: var(--bone); }
+    .btn-send {
+      justify-self: start;
+      margin-top: 0.5rem;
+      background: var(--bone);
+      color: var(--ink);
+    }
+    .btn-send:hover { background: var(--clay); color: var(--bone); }
+    .f-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .f-status:empty { display: none; }
+    .f-status {
+      font-size: 0.86rem;
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      background: rgba(244, 240, 233, 0.07);
+      color: rgba(244, 240, 233, 0.8);
+    }
+    .f-status.is-ok { background: rgba(185, 103, 66, 0.18); color: #f0dccf; }
+    .f-status.is-err { background: rgba(244, 240, 233, 0.1); color: #f0dccf; }
+    .btn-send:disabled { opacity: 0.6; cursor: default; }
+
+    @media (max-width: 900px) { .ass-in { grid-template-columns: 1fr; } }
+
+    /* ================= WHY ================= */
+    .mech { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); border-top: 1px solid var(--line-soft); }
+    .mech-i { background: var(--bone); padding: 2rem 1.6rem 2.4rem; }
+    .mech-n { font-size: 0.76rem; color: var(--clay); }
+    .mech-t { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; letter-spacing: -0.015em; margin: 0.85rem 0 0.7rem; }
+    .mech-d { font-size: 0.94rem; color: var(--stone); line-height: 1.6; }
+
+    .claim {
+      margin-top: clamp(2.5rem, 6vh, 4rem);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: clamp(2rem, 5vh, 3rem);
+    }
+    .claim-k { font-size: clamp(1.5rem, 3vw, 2.3rem); }
+    .claim-d { color: var(--stone); font-size: 0.98rem; max-width: 54ch; }
+
+    .mat-link { margin-top: 1.6rem; }
+
+    /* ================= MAINTENANCE ================= */
+    .care-in { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+    .care-copy .lede { margin-top: 1.3rem; }
+    .care-list { list-style: none; display: grid; gap: 0; }
+    .care-list li {
+      display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem;
+      align-items: baseline; padding: 1.15rem 0;
+      border-bottom: 1px solid rgba(244, 240, 233, 0.14);
+      font-size: 0.96rem; color: rgba(244, 240, 233, 0.78);
+    }
+    .care-list li:first-child { border-top: 1px solid rgba(244, 240, 233, 0.14); }
+    .care-list .num { font-size: 0.78rem; color: var(--clay-lt); }
+
+    /* ================= FAQ ================= */
+    .faq { border-top: 1px solid var(--line-soft); max-width: 62rem; }
+    .qa { border-bottom: 1px solid var(--line-soft); }
+    .qa summary {
+      list-style: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+      padding: 1.35rem 0;
+      font-family: var(--serif); font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+      font-weight: 400; letter-spacing: -0.012em;
+      transition: color 0.3s var(--ease);
+    }
+    .qa summary::-webkit-details-marker { display: none; }
+    .qa summary::after {
+      content: '';
+      flex: none; width: 11px; height: 11px;
+      border-right: 1.5px solid var(--stone); border-bottom: 1.5px solid var(--stone);
+      transform: rotate(45deg) translate(-2px, -2px);
+      transition: transform 0.35s var(--ease), border-color 0.3s var(--ease);
+    }
+    .qa[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); border-color: var(--clay); }
+    .qa summary:hover { color: var(--clay); }
+    .qa-b { padding: 0 0 1.6rem; max-width: 62ch; }
+    .qa-b p { color: var(--stone); font-size: 0.96rem; }
+    .qa-b p + p { margin-top: 0.9rem; }
+
+    .qa-confirm, .prd-confirm {
+      font-size: 0.84rem; color: var(--stone);
+      padding-left: 0.9rem; border-left: 2px solid var(--clay);
+    }
+    .qa-confirm span {
+      display: inline-block; font-size: 0.7rem; letter-spacing: 0.11em;
+      text-transform: uppercase; color: var(--clay); margin-right: 0.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .mech { grid-template-columns: 1fr; }
+      .claim, .care-in { grid-template-columns: 1fr; }
+    }
+
+    /* ================= FOOTER ================= */
+    .foot { background: var(--ink-2); color: var(--bone); padding-top: clamp(3rem, 7vh, 4.5rem); }
+    .foot-in { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+    .foot-brand img { width: 74px; height: 74px; border-radius: 3px; }
+    .foot-tag { margin-top: 1rem; font-size: 0.88rem; color: var(--stone-lt); max-width: 30ch; }
+    .foot-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .foot-cols > div { display: grid; gap: 0.45rem; align-content: start; font-size: 0.9rem; color: rgba(244, 240, 233, 0.68); }
+    .foot-cols .eyebrow-lt { margin-bottom: 0.5rem; }
+    .foot-cols a:hover { color: var(--bone); }
+    .foot-btm {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-block: 1.35rem;
+      border-top: 1px solid rgba(244, 240, 233, 0.12);
+      font-size: 0.8rem;
+      color: var(--stone-lt);
+    }
+
+    @media (max-width: 780px) {
+      .foot-in { grid-template-columns: 1fr; }
+    }
+  </style>
+</Base>

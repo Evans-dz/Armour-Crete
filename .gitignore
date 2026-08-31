@@ -1,0 +1,20 @@
+# Photos.app originals — 4.4 GB of HEIC/MOV, not source.
+# Re-export with the osascript recipe at the bottom of BRIEF.md.
+reference/stills/
+reference/video/
+reference/album-export/
+
+# Derived media (compressed video, poster frames, web-ready stills)
+# lives in public/media/ and IS committed — it's the built site's payload.
+
+node_modules/
+dist/
+.DS_Store
+*.log
+.vercel/
+.env
+.env.local
+
+
+# Astro build cache
+.astro/

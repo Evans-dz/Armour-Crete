@@ -1,0 +1,229 @@
+---
+// Shared nav + mobile menu. Used by every page so the menu never drifts.
+const { solid = false } = Astro.props;
+
+const links = [
+  { href: '/#services', label: 'Services' },
+  { href: '/#why', label: 'Why it fails' },
+  { href: '/#process', label: 'Process' },
+  { href: '/products', label: 'Products' },
+  { href: '/#care', label: 'Maintenance' },
+  { href: '/#faq', label: 'FAQ' },
+];
+
+const phones = [
+  { who: 'Dylan Evans', display: '435·994·5235', tel: '+14359945235' },
+  { who: 'Zac Evans', display: '435·224·6987', tel: '+14352246987' },
+];
+---
+
+<header class={solid ? 'nav nav-solid' : 'nav'}>
+  <div class="nav-in">
+    <a href="/" class="brand" aria-label="Armour Crete — home">
+      <img src="/logo.png" alt="Armour Crete" width="800" height="800" />
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="nav-end">
+      <div class="nav-tels">
+        {phones.map((p) => (
+          <a href={`tel:${p.tel}`}>
+            <span class="nav-who">{p.who.split(' ')[0]}</span>
+            <span class="num">{p.display}</span>
+          </a>
+        ))}
+      </div>
+      <a class="btn btn-primary nav-cta" href="/#assessment">Request an assessment</a>
+
+      <button
+        class="mbtn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobilemenu"
+        aria-label="Open menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mmenu" id="mobilemenu" hidden>
+  <nav class="mmenu-links" aria-label="Mobile">
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  </nav>
+
+  <div class="mmenu-tels">
+    {phones.map((p) => (
+      <a href={`tel:${p.tel}`}>
+        <span class="mmenu-who">{p.who}</span>
+        <span class="num mmenu-num">{p.display}</span>
+      </a>
+    ))}
+    <a class="mmenu-mail" href="mailto:evans@armour-crete.com">evans@armour-crete.com</a>
+  </div>
+
+  <a class="btn btn-primary mmenu-cta" href="/#assessment">Request an assessment</a>
+  <p class="mmenu-note">Licensed &amp; insured · Certified Deco applicator</p>
+</div>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('.mbtn');
+    var menu = document.getElementById('mobilemenu');
+    if (!btn || !menu) return;
+
+    var open = false;
+
+    function setOpen(next) {
+      open = next;
+      btn.setAttribute('aria-expanded', String(next));
+      btn.setAttribute('aria-label', next ? 'Close menu' : 'Open menu');
+      btn.classList.toggle('is-open', next);
+      document.documentElement.classList.toggle('menu-open', next);
+      if (next) {
+        menu.hidden = false;
+        // next frame so the transition actually runs
+        requestAnimationFrame(function () { menu.classList.add('is-open'); });
+      } else {
+        menu.classList.remove('is-open');
+        var done = function () { if (!open) menu.hidden = true; };
+        menu.addEventListener('transitionend', done, { once: true });
+        setTimeout(done, 400);
+      }
+    }
+
+    btn.addEventListener('click', function () { setOpen(!open); });
+
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && open) { setOpen(false); btn.focus(); }
+    });
+
+    // If the viewport grows past the breakpoint, drop the menu state
+    window.addEventListener('resize', function () {
+      if (open && window.innerWidth > 900) setOpen(false);
+    });
+  })();
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    border-bottom: 1px solid transparent;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+  }
+  .nav-solid,
+  .nav.stuck {
+    background: rgba(244, 240, 233, 0.88);
+    backdrop-filter: saturate(150%) blur(14px);
+    border-bottom-color: var(--line-soft);
+  }
+  .nav-in {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0.85rem var(--pad);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .brand img { width: 46px; height: 46px; border-radius: 3px; object-fit: cover; }
+
+  .nav-links { display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.88rem; color: var(--stone); }
+  .nav-links a { transition: color 0.3s var(--ease); }
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-end { display: flex; align-items: center; gap: 1.15rem; }
+
+  /* Both numbers, labelled. Unlabelled pairs are what made the old site
+     look disorganised — the names are what make this read as a company. */
+  .nav-tels { display: grid; gap: 0.1rem; }
+  .nav-tels a { display: flex; align-items: baseline; gap: 0.45rem; font-size: 0.78rem; color: var(--stone); transition: color 0.3s var(--ease); }
+  .nav-tels a:hover { color: var(--ink); }
+  .nav-who { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stone-lt); min-width: 2.6rem; }
+
+  .nav-cta { font-size: 0.86rem; padding: 0.66em 1.15em; }
+
+  /* ---- hamburger ---- */
+  .mbtn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px; height: 44px;
+    padding: 0 10px;
+    border: 0; border-radius: 999px;
+    background: rgba(23, 21, 19, 0.06);
+    cursor: pointer;
+  }
+  .mbtn span {
+    display: block; height: 1.5px; width: 100%;
+    background: var(--ink); border-radius: 2px;
+    transition: transform 0.32s var(--ease), opacity 0.2s var(--ease);
+  }
+  .mbtn.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .mbtn.is-open span:nth-child(2) { opacity: 0; }
+  .mbtn.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ---- mobile panel ---- */
+  .mmenu {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: var(--bone);
+    padding: 6.5rem var(--pad) 2.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.34s var(--ease), transform 0.34s var(--ease);
+  }
+  .mmenu.is-open { opacity: 1; transform: none; }
+
+  .mmenu-links { display: grid; }
+  .mmenu-links a {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    padding: 0.62rem 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .mmenu-tels { display: grid; gap: 0; margin-top: 2rem; }
+  .mmenu-tels a { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.95rem 0; border-bottom: 1px solid var(--line-soft); }
+  .mmenu-who { font-size: 0.8rem; color: var(--stone-lt); }
+  .mmenu-num { font-size: 1rem; color: var(--ink); }
+  .mmenu-mail { padding: 0.95rem 0; font-size: 0.92rem; color: var(--stone); }
+
+  .mmenu-cta { margin-top: 1.8rem; justify-content: center; }
+  .mmenu-note { margin-top: 1rem; font-size: 0.78rem; color: var(--stone-lt); text-align: center; }
+
+  @media (max-width: 1080px) {
+    .nav-links { gap: 1.15rem; font-size: 0.83rem; }
+  }
+
+  @media (max-width: 900px) {
+    .nav-links, .nav-tels, .nav-cta { display: none; }
+    .mbtn { display: flex; }
+    .nav-end { margin-left: auto; }
+  }
+
+  @media (min-width: 901px) {
+    .mmenu { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mmenu { transition: none; }
+    .mbtn span { transition: none; }
+  }
+</style>

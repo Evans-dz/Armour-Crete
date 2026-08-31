@@ -1,0 +1,397 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+// Technical detail sourced from Deco Products Inc's own product pages
+// (decoproducts.com), Aug 2026. Coverage figures are Armour Crete's, from the
+// old site's coverage table. Written in our own words — no manufacturer copy
+// is reproduced. Anything still unverified carries a visible marker.
+const products = [
+  {
+    n: '01',
+    name: 'DECO 20 Clear Finish',
+    type: 'Penetrating · reactive',
+    surface: 'Concrete',
+    coverage: '1,200–1,500',
+    role: 'The original, and still the default.',
+    body:
+      'A non-hazardous reactive sealer that soaks in rather than sitting on top, and ' +
+      'dries 100% transparent — no film, no sheen, no sign it is there. It is the one ' +
+      'we reach for on ordinary flatwork, and it is the product Deco built the company ' +
+      'on back in 1991.',
+    facts: [
+      '100% transparent — changes nothing about how the surface looks',
+      'Sharply slows how fast mould and mildew come back after a wash',
+      'The only clear sealer ICC-approved for dampproofing basement foundations',
+      'Non-hazardous, water-based, no solvents',
+    ],
+    note:
+      'It goes down early in the morning, before the slab has taken on the day’s heat. ' +
+      'On a hot surface it flash-dries and leaves whiting and streaks — which in ' +
+      'southern Utah is not a small detail, it is most of the job.',
+    use: ['Driveways', 'Walkways', 'Patios', 'Garage floors', 'Roof tile'],
+  },
+  {
+    n: '02',
+    name: 'Salt Shield 303',
+    type: 'Penetrating · silane/siloxane',
+    surface: 'Salt-exposed concrete',
+    coverage: '1,000–1,500',
+    role: 'For pool decks, and anywhere else salt lands.',
+    body:
+      'A clear water-based silane/siloxane emulsion that penetrates deep into the slab ' +
+      'to block water and the chlorides riding in it. Salt is the specific problem: it ' +
+      'dissolves in water, soaks into the pores, then crystallises as that water ' +
+      'evaporates, and crystals growing inside a confined pore push hard enough to ' +
+      'break the surface apart from underneath.',
+    facts: [
+      'Does not change the skid or slip resistance of the concrete',
+      'Dries clear — no film, no residue',
+      'Reduces spalling, freeze–thaw damage, dusting and mildew',
+      'Non-hazardous, non-toxic, non-flammable',
+    ],
+    note:
+      'This is the answer to the pool-deck question. It is a penetrating sealer, not a ' +
+      'coating, so it does not make a wet deck slicker than it already was.',
+    use: ['Pool decks', 'Salt pool surrounds', 'Softener discharge', 'Driveways', 'Sidewalks'],
+  },
+  {
+    n: '03',
+    name: 'SilaCast BES',
+    type: 'Penetrating · polymer emulsion',
+    surface: 'Pavers, roof tile & stone',
+    coverage: '700–1,000',
+    role: 'Wet look, without the film.',
+    body:
+      'Beauty Enhancing Sealer — a non-hazardous polymer emulsion for porous units: ' +
+      'concrete pavers, roof and barrel tile, natural stone. It penetrates and deepens ' +
+      'the material’s own colour from below rather than laying a shiny film on top, ' +
+      'and it carries two forms of UV protection.',
+    facts: [
+      'Never needs stripping before it can be re-coated',
+      'Enhances colour from within the substrate, not from a surface film',
+      'Two types of UV protection',
+      'Lowest coverage of the range — porous units simply drink more',
+    ],
+    note:
+      'Worth knowing the difference: a topical acrylic sits on the surface as a film. ' +
+      'Films can yellow under UV, they can peel, and taking one off means harsh ' +
+      'chemicals. This does not build a film, so none of that applies.',
+    use: ['Paver driveways', 'Stone patios', 'Roof tile', 'Retaining walls'],
+  },
+  {
+    n: '04',
+    name: 'Shine-A-Cast',
+    type: 'Hybrid · penetrating + topical',
+    surface: 'High shine',
+    coverage: '750–1,250',
+    role: 'When you want it obvious.',
+    body:
+      'A hybrid: it penetrates to enhance the colour and also leaves a protective layer ' +
+      'on the surface, which is what produces the high shine and what locks paver joint ' +
+      'sand in place. It will bring a sun-faded surface back, and pigment can be added ' +
+      'to tune the colour.',
+    facts: [
+      'Wet-look, high-shine finish',
+      'Locks joint sand on paver work',
+      'UV protected and scratch resistant',
+      'Restricted to approved applicators',
+    ],
+    note:
+      'This one leaves a surface layer, so for a pool deck or anywhere that gets walked ' +
+      'on wet it is a conversation rather than a default. Salt Shield is usually the ' +
+      'better call there.',
+    use: ['Wet-look driveways', 'Decorative patios', 'Paver work', 'Feature entries'],
+  },
+  {
+    n: '05',
+    name: 'TravaCast',
+    type: 'Topical · acrylic',
+    surface: 'Natural stone',
+    coverage: '750–1,250',
+    role: 'For stone that will not absorb anything.',
+    body:
+      'A single-component acrylic built for non-porous materials — travertine, Spanish ' +
+      'tile, natural stone — where a penetrating sealer has nothing to penetrate into. ' +
+      'It bonds to the surface instead, and comes UV protected.',
+    facts: [
+      'Adheres to non-porous stone and tile that penetrating sealers cannot treat',
+      'Strong chemical resistance, and holds up against water blushing',
+      'Guards against most staining and helps prevent discolouration',
+      'Self-levelling, though back-rolling while wet helps',
+    ],
+    note:
+      'Travertine is everywhere around southern Utah pools, and it stains in ways that ' +
+      'do not come back out. This is a topical acrylic, so it will need redoing more ' +
+      'often than the penetrating products above.',
+    use: ['Travertine', 'Spanish tile', 'Flagstone', 'Stone coping'],
+  },
+  {
+    n: '06',
+    name: 'Bio Blacktop',
+    type: 'Conditioner · natural oil & co-polymer',
+    surface: 'Asphalt',
+    coverage: null,
+    role: 'Asphalt, without the tar.',
+    body:
+      'Almost every blacktop sealer on the market is an asphalt or tar-based product — ' +
+      'a by-product of the oil industry, painted back onto your driveway. This is not ' +
+      'that. It is a blend of natural oils and co-polymers that conditions dried-out ' +
+      'asphalt as well as sealing it, so an old grey driveway gets its colour and its ' +
+      'flexibility back rather than just getting painted over.',
+    facts: [
+      'Contains no asphalt and no tar',
+      'Conditions old, dried-out asphalt rather than coating it',
+      'Chemical and UV resistant',
+      'Dries fast, and cleans up with soap and water',
+    ],
+    note:
+      'It gets sprayed and back-rolled, never squeegeed — a squeegee pulls too much ' +
+      'material to the surface and you end up with a driveway that looks painted.',
+    use: ['Asphalt driveways', 'Blacktop parking', 'Private lanes'],
+  },
+];
+
+const SITE = 'https://www.armour-crete.com';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Products', item: SITE + '/products' },
+      ],
+    },
+    {
+      '@type': 'ItemList',
+      name: 'Deco sealers applied by Armour Crete',
+      itemListElement: products.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Product',
+          name: p.name,
+          category: p.type,
+          description: p.body,
+          brand: { '@type': 'Brand', name: 'Deco Products, Inc.' },
+          material: p.surface,
+        },
+      })),
+    },
+  ],
+};
+---
+
+<Base
+  title="Deco Concrete Sealers We Use | St. George, UT | Armour Crete"
+  description="The six Deco sealers Armour Crete applies in St. George, Utah — DECO 20 Clear, Salt Shield 303, SilaCast BES, Shine-A-Cast, TravaCast and Bio Blacktop. Penetrating vs topical, surfaces and coverage."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+  <SiteNav solid={true} />
+
+  <main>
+    <section class="phero">
+      <div class="wrap">
+        <p class="eyebrow rv">Materials</p>
+        <h1 class="display phero-h rv">We only use<br />Deco products.</h1>
+        <div class="hero-rule rv"></div>
+        <div class="phero-grid">
+          <p class="lede rv">
+            Deco Products has been manufacturing in Denver since 1991, water-based and
+            solvent-free from the start. We are a certified Deco applicator, which is
+            what lets us put down the restricted products — Shine-A-Cast and the Deco 20
+            Seal foundation membrane are approved-applicator only. Which sealer goes on
+            your property is decided by the surface, the exposure and the finish you
+            want, not by what happened to be on the truck.
+          </p>
+          <dl class="facts rv">
+            <div><dt class="num">1991</dt><dd>Deco’s first product, still in the range</dd></div>
+            <div><dt class="num">ICC</dt><dd>Approved for foundation dampproofing</dd></div>
+            <div><dt class="num">0</dt><dd>Solvents, and no house-brand substitutions</dd></div>
+            <div><dt class="num">✓</dt><dd>Deco Certified Applicator</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="plist">
+      <div class="wrap">
+        {products.map((p) => (
+          <article class="prd rv">
+            <div class="prd-l">
+              <span class="num prd-n">{p.n}</span>
+              <h2 class="display prd-name">{p.name}</h2>
+              <dl class="prd-spec">
+                <div><dt>Type</dt><dd>{p.type}</dd></div>
+                <div><dt>Surface</dt><dd>{p.surface}</dd></div>
+                {p.coverage
+                  ? <div><dt>Coverage</dt><dd><span class="num">{p.coverage}</span> sq ft / 5 gal</dd></div>
+                  : <div><dt>Coverage</dt><dd>Varies with asphalt condition</dd></div>}
+              </dl>
+              <ul class="prd-use">
+                {p.use.map((u) => <li>{u}</li>)}
+              </ul>
+            </div>
+            <div class="prd-r">
+              <p class="prd-role">{p.role}</p>
+              <p class="prd-body">{p.body}</p>
+              <ul class="prd-facts">
+                {p.facts.map((f) => <li>{f}</li>)}
+              </ul>
+              <p class="prd-note">{p.note}</p>
+            </div>
+          </article>
+        ))}
+
+        <p class="plist-note">
+          Coverage varies with surface condition and porosity — a rough, older or thirstier
+          slab drinks more, so treat these as planning figures rather than promises. Every
+          job gets a test section before the rest of it goes down.
+        </p>
+      </div>
+    </section>
+
+    <!-- builder track -->
+    <section class="sec sec-dark">
+      <div class="wrap">
+        <div class="sec-head rv">
+          <p class="eyebrow eyebrow-lt">For builders</p>
+          <h2 class="display sec-h">Deco 20 Seal, on the<br />foundation side.</h2>
+        </div>
+        <div class="bld">
+          <div class="rv">
+            <p class="lede lede-lt">
+              The waterproofing membrane we spray on new foundation walls is a hybrid
+              acrylic resin — poured concrete, pre-cast, masonry and ICF forms. It goes on
+              as one continuous coating with no seams to fail, it can be applied to damp
+              walls, and it removes the need for 6 mil poly.
+            </p>
+          </div>
+          <ul class="bld-list rv">
+            <li><span class="num">01</span> Approved by the International Code Council</li>
+            <li><span class="num">02</span> Continuous coating — no seams</li>
+            <li><span class="num">03</span> Goes on damp walls, footing to top of wall</li>
+            <li><span class="num">04</span> Rated for hydrostatic pressure</li>
+            <li><span class="num">05</span> Bridges non-structural cracks</li>
+            <li><span class="num">06</span> Not asphalt-based</li>
+          </ul>
+        </div>
+        <p class="astm rv">
+          Independently tested to <span class="num">ASTM C 1306</span> for hydrostatic
+          pressure over cracks, <span class="num">C 836</span> for low-temperature
+          flexibility, crack bridging and adhesion strength,
+          <span class="num">D 2939</span> for water resistance, and
+          <span class="num">E 96</span> for water vapour permeance.
+        </p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="wrap pcta">
+        <div class="rv">
+          <p class="eyebrow">Not sure which</p>
+          <h2 class="display sec-h2">That is our problem,<br />not yours.</h2>
+        </div>
+        <div class="rv">
+          <p class="lede">
+            You do not need to pick a product. We look at the surface, the exposure and
+            what you want it to look like, and we bring the right one.
+          </p>
+          <a class="btn btn-primary pcta-btn" href="/#assessment">Request an assessment</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-btm">
+      <span>© 2026 Armour Crete</span>
+      <span><a href="/">Back to the main site</a></span>
+    </div>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      var els = document.querySelectorAll('.rv');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+
+  <style>
+    .phero { padding-top: clamp(7.5rem, 18vh, 12rem); padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+    .phero-h { font-size: clamp(2.8rem, 7.6vw, 6rem); margin: 1rem 0 0; }
+    .hero-rule { height: 1px; background: var(--line); margin: clamp(2rem, 5vh, 3.2rem) 0 clamp(1.8rem, 4vh, 2.6rem); }
+    .phero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+    .facts { display: grid; gap: 0; }
+    .facts > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.25rem; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--line-soft); }
+    .facts > div:first-child { border-top: 1px solid var(--line-soft); }
+    .facts dt { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.02em; color: var(--clay); }
+    .facts dd { font-size: 0.88rem; color: var(--stone); }
+
+    .plist { padding-bottom: clamp(3rem, 8vh, 5rem); }
+    .prd { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(1.5rem, 5vw, 4rem); padding: clamp(2.4rem, 5vh, 3.6rem) 0; border-top: 1px solid var(--line-soft); }
+    .prd-n { font-size: 0.76rem; color: var(--stone-lt); }
+    .prd-name { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 0.6rem 0 1.4rem; }
+    .prd-spec { display: grid; gap: 0.55rem; }
+    .prd-spec > div { display: flex; justify-content: space-between; gap: 1rem; max-width: 22rem; border-bottom: 1px solid var(--line-soft); padding-bottom: 0.55rem; }
+    .prd-spec dt { font-size: 0.8rem; color: var(--stone-lt); }
+    .prd-spec dd { font-size: 0.85rem; color: var(--ink); text-align: right; }
+    .prd-use { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.3rem; }
+    .prd-use li { padding: 0.45em 0.9em; border-radius: 999px; background: var(--bone-2); font-size: 0.8rem; color: var(--stone); }
+
+    .prd-role { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; letter-spacing: -0.015em; margin-bottom: 0.9rem; }
+    .prd-body { color: var(--stone); font-size: 0.98rem; max-width: 58ch; }
+    .prd-facts { list-style: none; margin-top: 1.4rem; display: grid; gap: 0; max-width: 58ch; }
+    .prd-facts li { font-size: 0.92rem; color: var(--ink); padding: 0.7rem 0 0.7rem 1.4rem; border-bottom: 1px solid var(--line-soft); position: relative; }
+    .prd-facts li:first-child { border-top: 1px solid var(--line-soft); }
+    .prd-facts li::before { content: ''; position: absolute; left: 0; top: 1.15rem; width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
+    .prd-note { margin-top: 1.4rem; font-size: 0.92rem; color: var(--stone); padding-left: 1rem; border-left: 2px solid var(--sand-deep); max-width: 56ch; font-style: italic; }
+
+    .prd-open { border-top: 1px solid var(--line); }
+    .prd-confirm { font-size: 0.92rem; color: var(--stone); padding-left: 1rem; border-left: 2px solid var(--clay); max-width: 60ch; }
+    .prd-confirm span { display: inline-block; font-size: 0.7rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--clay); margin-right: 0.5rem; }
+    .prd-confirm strong { color: var(--ink); font-weight: 500; }
+
+    .plist-note { margin-top: 2.5rem; padding-top: 1.6rem; border-top: 1px solid var(--line-soft); font-size: 0.88rem; color: var(--stone-lt); max-width: 62ch; }
+
+    .sec { padding: clamp(4rem, 10vh, 7rem) 0; }
+    .sec-dark { background: var(--ink); color: var(--bone); }
+    .sec-head { margin-bottom: clamp(2.2rem, 5vh, 3.4rem); }
+    .sec-h { font-size: clamp(1.9rem, 4vw, 3rem); margin-top: 0.75rem; color: var(--bone); }
+    .sec-h2 { font-size: clamp(1.9rem, 4vw, 3rem); margin-top: 0.75rem; }
+    .eyebrow-lt { color: var(--stone-lt); }
+    .lede-lt { color: rgba(244, 240, 233, 0.62); }
+
+    .bld { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 4.5rem); align-items: start; }
+    .bld-list { list-style: none; display: grid; gap: 0; }
+    .bld-list li { display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem; align-items: baseline; padding: 0.95rem 0; border-bottom: 1px solid rgba(244, 240, 233, 0.14); font-size: 0.94rem; color: rgba(244, 240, 233, 0.78); }
+    .bld-list li:first-child { border-top: 1px solid rgba(244, 240, 233, 0.14); }
+    .bld-list .num { font-size: 0.76rem; color: var(--clay-lt); }
+    .astm { margin-top: clamp(2rem, 5vh, 3rem); padding-top: 1.5rem; border-top: 1px solid rgba(244, 240, 233, 0.14); font-size: 0.86rem; color: rgba(244, 240, 233, 0.5); max-width: 74ch; }
+    .astm .num { color: var(--clay-lt); }
+
+    .pcta { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: end; }
+    .pcta-btn { margin-top: 1.6rem; }
+
+    .foot { background: var(--ink-2); color: var(--bone); }
+    .foot-btm { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.35rem; font-size: 0.8rem; color: var(--stone-lt); }
+    .foot-btm a:hover { color: var(--bone); }
+
+    @media (max-width: 900px) {
+      .phero-grid, .prd, .bld, .pcta { grid-template-columns: 1fr; }
+    }
+  </style>
+</Base>
