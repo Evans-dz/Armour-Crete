@@ -375,7 +375,6 @@ a site visit is a guess, and points at the free assessment.
 - The foundation waterproofing sequence for the builder/GC track.
 - One phone number on the site or both.
 - **Mobile nav menu** — still the biggest structural gap; nav collapses to logo + CTA.
-- Form still composes a `mailto:` and needs real wiring.
 
 ---
 
@@ -465,7 +464,6 @@ materials section copy, and the footer. Do not bury it.
 - Warranty terms per package.
 - One phone number on the site or both.
 - **Mobile nav menu** — still the biggest structural gap.
-- Form still composes a `mailto:` and needs real wiring.
 
 ---
 
@@ -506,13 +504,27 @@ Verified with a stubbed `fetch`: correct endpoint, correct payload, honeypot str
 before send, success state renders, form resets. **No real submission was sent** — that
 would have put a test lead in Dylan's inbox.
 
-⚠️ **TWO THINGS DYLAN MUST DO — the form does not deliver until he does:**
+### ✅ ACTIVATED 2026-08-31
 
-1. **Activate it.** FormSubmit requires a one-time activation. The first submission
-   sends an activation link to evans@armour-crete.com that must be clicked. Send one
-   test through the live form, click the link in the email, then send a second test to
-   confirm it arrives.
-2. **Decide if a third party is acceptable.** Customer names, phone numbers and property
+Dylan submitted once, clicked the activation link, and FormSubmit returned "Form
+Activated". A follow-up test submission returned success with no fallback triggered.
+**The form forwards to evans@armour-crete.com.**
+
+Note the first submission appeared to "fail" and opened the mail client. That was
+correct: FormSubmit does not forward the activation submission itself, so the code
+treated it as a non-delivery and fell back rather than showing a false success. The
+fallback did exactly its job.
+
+⚠️ **RE-TEST AFTER DEPLOY — do not assume this carries over.** FormSubmit's confirmation
+recorded the form as living at `http://localhost:4179/`. Once the site is on
+www.armour-crete.com the submissions come from a different origin, and FormSubmit may
+treat that as a new form needing its own activation. **The first thing to do after the
+first deploy is submit a test from the live domain and watch for either the email or a
+second activation link.** If this is missed, the form will look like it works while
+silently dropping every lead — the precise failure the old site had.
+
+⚠️ **One thing Dylan should still decide:**
+**Is a third party acceptable?** Customer names, phone numbers and property
    addresses will route through formsubmit.co. If he would rather that data never leave
    his own infrastructure, the alternative is a Vercel serverless function plus an email
    API key (Resend or similar) — more setup, needs a key, but nothing third-party in the
@@ -614,5 +626,5 @@ Ranking locally is mostly off-page. In rough order of impact:
 - Business street address for the schema.
 - Reseal interval per product; cure time before sealing new flatwork; warranty terms.
 - Foundation waterproofing sequence for the builder track.
-- Form needs its one-time FormSubmit activation.
+- Re-test the form from the live domain immediately after the first deploy.
 - Nothing committed; repo still has zero commits.
