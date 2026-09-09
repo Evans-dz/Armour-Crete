@@ -1,4 +1,6 @@
 ---
+import Analytics from '../components/Analytics.astro';
+
 const {
   title = 'Concrete Sealing & Driveway Sealer | St. George, UT | Armour Crete',
   description =
@@ -57,6 +59,8 @@ const ogImage = new URL(image, Astro.site);
     />
 
     <slot name="head" />
+
+    <Analytics />
   </head>
   <body>
     <slot />
