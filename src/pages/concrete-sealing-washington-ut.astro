@@ -1,0 +1,115 @@
+---
+import Sub from '../layouts/Sub.astro';
+import { cityPageSchema, SERVICE_PAGES } from '../data/site.js';
+
+const description =
+  'Concrete sealing in Washington, Utah — driveways, patios, pool decks and expansion joints across Coral Canyon, Green Springs and the rest of Washington City. Based next door in St. George.';
+
+const schema = cityPageSchema({
+  path: '/concrete-sealing-washington-ut',
+  city: 'Washington',
+  description,
+});
+---
+
+<Sub
+  title="Concrete Sealing in Washington, UT | Armour Crete"
+  description={description}
+  crumb="Washington, UT"
+  schema={schema}
+>
+  <Fragment slot="h1">Concrete sealing<br />in Washington City.</Fragment>
+  <Fragment slot="lede">
+    Washington is growing faster than almost anywhere in the county, and every
+    one of those new driveways, patios and pool decks is starting the same clock
+    against the same desert. We are based next door in St. George — close enough
+    that the free assessment is genuinely free.
+  </Fragment>
+  <Fragment slot="aside">
+    <dl class="facts">
+      <div><dt>24h</dt><dd>Cure before you walk or drive on it</dd></div>
+      <div><dt>Deco</dt><dd>The only products we put down</dd></div>
+      <div><dt>Free</dt><dd>On-site assessment, anywhere in Washington</dd></div>
+    </dl>
+  </Fragment>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Services in Washington, UT</p>
+        <h2 class="display sec-h">Everything we do,<br />done here.</h2>
+      </div>
+      <ul class="chips rv">
+        {SERVICE_PAGES.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+      </ul>
+      <div class="prose rv" style="margin-top: 2rem;">
+        <p>
+          From Coral Canyon to Green Springs to the older streets near the fields,
+          the work is the same four steps: clean, dry, seal, cure — with prep
+          first when the surface needs it, and a
+          <a class="tlink" href="/products">named Deco product</a> matched to the
+          exposure rather than whatever was on the truck.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-dark">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow eyebrow-lt">Why here, why now</p>
+        <h2 class="display sec-h">New concrete is the<br />best time to seal.</h2>
+      </div>
+      <div class="prose rv">
+        <p>
+          A lot of Washington's concrete is young, and young concrete has a
+          window: once it has fully cured and given up its moisture, sealing it
+          protects a surface that has not yet taken damage — which beats
+          restoring one that has. The desert does not wait long. Hundred-degree
+          summer slabs, winter nights below freezing, salt pools and softener
+          discharge all start working on an unsealed surface from year one.
+        </p>
+        <p>
+          If your build is recent, the assessment tells you whether the slab is
+          ready yet. If your street is one of the older ones, it tells you what
+          prep comes first. Either way it costs nothing and commits you to
+          nothing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Washington questions</p>
+        <h2 class="display sec-h">Asked in<br />Washington.</h2>
+      </div>
+      <div class="faq rv">
+        <details class="qa">
+          <summary>Do you charge to come out to Washington?</summary>
+          <div class="qa-b"><p>
+            No. The on-site assessment is free everywhere we work, and Washington
+            is a few minutes from our base in St. George.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>Our subdivision is brand new. When can our driveway be sealed?</summary>
+          <div class="qa-b"><p>
+            Once the concrete has fully cured and given up its moisture — sealing
+            too early is how finishes fail. Tell us the pour date and we will
+            schedule it properly.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>Do you work with HOAs here?</summary>
+          <div class="qa-b"><p>
+            Yes — common-area flatwork, joint work and sealing, bid from a site
+            visit with a scope document that says exactly what goes down and
+            where.
+          </p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Sub>

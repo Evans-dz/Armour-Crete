@@ -1,0 +1,126 @@
+---
+import Sub from '../layouts/Sub.astro';
+import { servicePageSchema } from '../data/site.js';
+
+const description =
+  'Foundation waterproofing and damp proofing for new construction in St. George, Washington County and statewide — ICC-approved Deco foundation membrane, scheduled to your build calendar.';
+
+const schema = servicePageSchema({
+  path: '/foundation-waterproofing',
+  name: 'Foundation waterproofing and damp proofing',
+  description,
+  crumb: 'Foundation waterproofing',
+});
+---
+
+<Sub
+  title="Foundation Waterproofing, New Construction | St. George UT"
+  description={description}
+  crumb="Foundation waterproofing"
+  schema={schema}
+>
+  <Fragment slot="h1">Below grade,<br />on your calendar.</Fragment>
+  <Fragment slot="lede">
+    Foundation waterproofing and damp proofing for builders and general
+    contractors — applied between pour and backfill, scheduled to the build
+    calendar rather than ours. Based in St. George, working across Washington
+    County and available statewide.
+  </Fragment>
+  <Fragment slot="aside">
+    <dl class="facts">
+      <div><dt>ICC</dt><dd>Approved Deco foundation membrane — applicator-restricted, and we hold the certification</dd></div>
+      <div><dt>Yours</dt><dd>The schedule we work to — between pour and backfill</dd></div>
+      <div><dt>4</dt><dd>Client types: builders, HOA, commercial, municipal</dd></div>
+    </dl>
+  </Fragment>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">The scope</p>
+        <h2 class="display sec-h">Before the backfill<br />goes in.</h2>
+      </div>
+      <div class="prose rv">
+        <p>
+          Once the walls are backfilled, whatever is on them is what the house gets
+          — the one window to do this right is between the pour and the dirt going
+          back. We work inside that window, coordinated with your super, so the
+          membrane is down, cured and inspected without holding up the schedule.
+        </p>
+        <p>
+          The materials are Deco's foundation line, including the ICC-approved
+          membrane and the clear dampproofing sealer — restricted products that
+          require a certified applicator, which is the certification we hold.
+          <strong>Damp proofing</strong> handles soil moisture on walls that will
+          never see a water table; <strong>waterproofing</strong> is the heavier
+          assembly for where hydrostatic pressure is a real possibility. Which one
+          a given wall needs is a conversation between your plans, the soil report
+          and the inspector — we bid either.
+        </p>
+        <p>
+          Beyond foundations, the same crew handles HOA, commercial and municipal
+          flatwork sealing — <a class="tlink" href="/driveway-sealing">the same
+          process</a> as our residential work, at whatever scale the contract runs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-dark">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow eyebrow-lt">Working with us</p>
+        <h2 class="display sec-h">Built for the<br />build schedule.</h2>
+      </div>
+      <div class="rv">
+        <ul class="dotlist">
+          <li>Scheduled to the build calendar — we move when the pour moves</li>
+          <li>Certified Deco applicator for the restricted foundation products</li>
+          <li>Licensed &amp; insured, with documentation on request</li>
+          <li>One crew, one point of contact, from first walk to sign-off</li>
+          <li>Repeat-builder pricing discussed at the first job, not the tenth</li>
+        </ul>
+        <p class="note" style="border-color: rgba(244,240,233,0.3); color: rgba(244,240,233,0.6);">
+          New-build flatwork has its own rule: fresh concrete has to cure and give
+          up its moisture before any sealer goes down. Talk to us at the pour and
+          the sealing gets scheduled properly instead of squeezed in wrong.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Builder questions</p>
+        <h2 class="display sec-h">Asked on<br />site walks.</h2>
+      </div>
+      <div class="faq rv">
+        <details class="qa">
+          <summary>Damp proofing or waterproofing — who decides?</summary>
+          <div class="qa-b"><p>
+            Your plans and the code do; we price and apply what is specified. Where
+            the spec is open, we will walk the site with you and give you the
+            honest read on what the soil and the grade actually call for.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>Can you match our pour schedule?</summary>
+          <div class="qa-b"><p>
+            That is the arrangement. Foundation work is scheduled to your calendar,
+            and we hold the slot when the pour date moves — because it always
+            moves.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>Do you take on HOA and municipal flatwork?</summary>
+          <div class="qa-b"><p>
+            Yes — sealing and joint work for HOA common areas, commercial pads and
+            municipal surfaces, bid from a site visit. The scope document says
+            exactly what goes down and where.
+          </p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Sub>

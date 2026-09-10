@@ -7,26 +7,31 @@ const services = [
     n: '01',
     t: 'Concrete sealing',
     d: 'Driveways, patios, walkways and garage floors — protected against UV, salt and staining.',
+    href: '/driveway-sealing',
   },
   {
     n: '02',
     t: 'Decorative & wet-look',
     d: 'Colour-enhanced finishes that deepen the surface and hold it there.',
+    href: '/wet-look-concrete-sealing',
   },
   {
     n: '03',
     t: 'Pool decks & salt',
     d: 'Salt-resistant systems for pool surrounds and the slabs that live next to them.',
+    href: '/pool-deck-sealing',
   },
   {
     n: '04',
     t: 'Foundation waterproofing',
     d: 'Below-grade protection for new construction, scheduled to your build calendar.',
+    href: '/foundation-waterproofing',
   },
   {
     n: '05',
     t: 'Damp proofing',
     d: 'Moisture control on foundation walls before backfill goes in.',
+    href: '/foundation-waterproofing',
   },
   {
     n: '06',
@@ -37,13 +42,23 @@ const services = [
     n: '07',
     t: 'Expansion joints',
     d: 'Failed joint filler lets water straight down into the sub-base. We cut the old material out, clean the channel and re-fill it so the slab can move without letting anything in.',
+    href: '/expansion-joint-replacement',
   },
   {
     n: '08',
     t: 'Asphalt & blacktop sealing',
     d: 'Sealed and conditioned with a natural-oil product containing no asphalt and no tar — old blacktop is restored rather than painted over.',
+    href: '/asphalt-sealing',
   },
 ];
+
+// Area chips that have a dedicated city page link out to it.
+const cityLinks = {
+  Washington: '/concrete-sealing-washington-ut',
+  Hurricane: '/concrete-sealing-hurricane-ut',
+  Ivins: '/concrete-sealing-ivins-ut',
+  'Santa Clara': '/concrete-sealing-santa-clara-ut',
+};
 
 const steps = [
   { n: '01', t: 'Clean', d: 'The slab gets cleaned end to end. Nothing goes down over dirt.' },
@@ -128,7 +143,12 @@ const schema = {
         name: 'Concrete protection services',
         itemListElement: services.map((sv) => ({
           '@type': 'Offer',
-          itemOffered: { '@type': 'Service', name: sv.t, description: sv.d },
+          itemOffered: {
+            '@type': 'Service',
+            name: sv.t,
+            description: sv.d,
+            ...(sv.href ? { url: SITE + sv.href } : {}),
+          },
         })),
       },
     },
@@ -154,12 +174,13 @@ const schema = {
 ---
 
 <Base
-  title="Concrete Sealing & Driveway Sealer | St. George, UT | Armour Crete"
+  title="Concrete Sealing St. George, UT | Driveway Sealer | Armour Crete"
   description="Concrete sealing, wet-look finishes, pool deck salt protection, expansion joints and foundation waterproofing in St. George and Washington County, Utah. Certified Deco applicator. Free on-site assessment."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </Fragment>
+  <a class="skip-link" href="#top">Skip to content</a>
   <SiteNav />
 
   <main id="top">
@@ -205,7 +226,9 @@ const schema = {
           {services.map((s) => (
             <li class="svc-i rv">
               <span class="num svc-n">{s.n}</span>
-              <h3 class="svc-t">{s.t}</h3>
+              <h3 class="svc-t">
+                {s.href ? <a href={s.href}>{s.t}<span class="svc-go" aria-hidden="true"> →</span></a> : s.t}
+              </h3>
               <p class="svc-d">{s.d}</p>
             </li>
           ))}
@@ -386,7 +409,9 @@ const schema = {
           <h2 class="display sec-h">Based in St. George.<br />Available statewide.</h2>
         </div>
         <ul class="areas rv">
-          {areas.map((a) => <li>{a}</li>)}
+          {areas.map((a) => (
+            <li>{cityLinks[a] ? <a href={cityLinks[a]}>{a}</a> : a}</li>
+          ))}
         </ul>
       </div>
     </section>
@@ -519,10 +544,10 @@ const schema = {
 
         <form class="ass-form rv" id="acform">
           <div class="f-row">
-            <label class="fld"><span>Name</span><input name="name" type="text" required /></label>
-            <label class="fld"><span>Phone</span><input name="phone" type="tel" required /></label>
+            <label class="fld"><span>Name</span><input name="name" type="text" autocomplete="name" required /></label>
+            <label class="fld"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required /></label>
           </div>
-          <label class="fld"><span>Email</span><input name="email" type="email" required /></label>
+          <label class="fld"><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
           <div class="f-row">
             <label class="fld">
               <span>Property</span>
@@ -545,7 +570,7 @@ const schema = {
               </select>
             </label>
           </div>
-          <label class="fld"><span>Address or area</span><input name="where" type="text" /></label>
+          <label class="fld"><span>Address or area</span><input name="where" type="text" autocomplete="street-address" /></label>
           <label class="fld"><span>Anything we should know</span><textarea name="notes" rows="3"></textarea></label>
           <input type="text" name="_honey" class="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button class="btn btn-send" type="submit">Send request</button>
@@ -564,6 +589,23 @@ const schema = {
       </div>
 
       <div class="foot-cols">
+        <div>
+          <p class="eyebrow eyebrow-lt">Services</p>
+          <a href="/driveway-sealing">Driveway sealing</a>
+          <a href="/pool-deck-sealing">Pool deck sealing</a>
+          <a href="/wet-look-concrete-sealing">Wet-look &amp; decorative</a>
+          <a href="/expansion-joint-replacement">Expansion joints</a>
+          <a href="/asphalt-sealing">Asphalt &amp; blacktop</a>
+          <a href="/foundation-waterproofing">Foundation waterproofing</a>
+        </div>
+        <div>
+          <p class="eyebrow eyebrow-lt">Service area</p>
+          <span>St. George</span>
+          <a href="/concrete-sealing-washington-ut">Washington</a>
+          <a href="/concrete-sealing-hurricane-ut">Hurricane</a>
+          <a href="/concrete-sealing-ivins-ut">Ivins</a>
+          <a href="/concrete-sealing-santa-clara-ut">Santa Clara</a>
+        </div>
         <div>
           <p class="eyebrow eyebrow-lt">Contact</p>
           <a class="num" href="tel:+14359945235">435·994·5235</a>
@@ -700,6 +742,14 @@ const schema = {
   </script>
 
   <style>
+    /* ================= SKIP LINK ================= */
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 100;
+      background: var(--ink); color: var(--bone);
+      padding: 0.7em 1.2em; border-radius: 0 0 10px 0; font-size: 0.9rem;
+    }
+    .skip-link:focus { left: 0; }
+
     /* ================= HERO ================= */
     /* No image. Type, space, and three numbers do the work. */
     .hero {
@@ -792,6 +842,9 @@ const schema = {
       margin: 0.85rem 0 0.5rem;
     }
     .svc-d { font-size: 0.92rem; color: var(--stone); line-height: 1.55; transition: color 0.45s var(--ease); }
+    .svc-go { color: var(--clay); transition: color 0.45s var(--ease); }
+    .svc-i:hover .svc-go { color: var(--clay-lt); }
+    .areas li a { color: inherit; display: block; margin: -0.6em -1.15em; padding: 0.6em 1.15em; border-radius: 999px; }
 
     /* keep the final row full whether the count lands 1 or 2 short */
     .svc-i:last-child:nth-child(3n + 1) { grid-column: span 3; }
@@ -854,9 +907,9 @@ const schema = {
       padding: 1.05rem 1.25rem;
       font-size: 0.95rem;
       letter-spacing: 0.01em;
-      transition: background 0.4s var(--ease), color 0.4s var(--ease), padding-left 0.4s var(--ease);
+      transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
     }
-    .prod:hover { background: var(--ink); color: var(--bone); padding-left: 1.75rem; }
+    .prod:hover { background: var(--ink); color: var(--bone); transform: translateX(0.5rem); }
 
     @media (max-width: 900px) { .mat-in { grid-template-columns: 1fr; } }
 
@@ -1023,11 +1076,13 @@ const schema = {
 
     /* ================= FOOTER ================= */
     .foot { background: var(--ink-2); color: var(--bone); padding-top: clamp(3rem, 7vh, 4.5rem); }
-    .foot-in { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+    .foot-in { display: grid; grid-template-columns: 0.55fr 1.45fr; gap: 2.5rem; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
     .foot-brand img { width: 74px; height: 74px; border-radius: 3px; }
     .foot-tag { margin-top: 1rem; font-size: 0.88rem; color: var(--stone-lt); max-width: 30ch; }
-    .foot-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .foot-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
     .foot-cols > div { display: grid; gap: 0.45rem; align-content: start; font-size: 0.9rem; color: rgba(244, 240, 233, 0.68); }
+    .foot-cols a { display: inline-block; padding-block: 3px; }
+    section[id] { scroll-margin-top: 88px; }
     .foot-cols .eyebrow-lt { margin-bottom: 0.5rem; }
     .foot-cols a:hover { color: var(--bone); }
     .foot-btm {
@@ -1042,6 +1097,7 @@ const schema = {
 
     @media (max-width: 780px) {
       .foot-in { grid-template-columns: 1fr; }
+      .foot-cols { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </Base>

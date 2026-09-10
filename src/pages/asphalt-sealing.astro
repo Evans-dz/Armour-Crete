@@ -1,0 +1,121 @@
+---
+import Sub from '../layouts/Sub.astro';
+import { servicePageSchema } from '../data/site.js';
+
+const description =
+  'Asphalt and blacktop sealing in St. George, Utah with Bio Blacktop — natural oils and co-polymers that condition dried-out asphalt rather than painting tar over it.';
+
+const schema = servicePageSchema({
+  path: '/asphalt-sealing',
+  name: 'Asphalt and blacktop sealing',
+  description,
+  crumb: 'Asphalt & blacktop',
+});
+---
+
+<Sub
+  title="Asphalt Sealing Without Tar | St. George UT | Armour Crete"
+  description={description}
+  crumb="Asphalt & blacktop"
+  schema={schema}
+>
+  <Fragment slot="h1">Restored,<br />not painted over.</Fragment>
+  <Fragment slot="lede">
+    Almost every blacktop sealer on the market is an asphalt or tar product — a
+    by-product of the oil industry, painted back onto your driveway. We use a
+    blend of natural oils and co-polymers instead, so old grey asphalt gets its
+    colour and its flexibility back rather than a coat of black paint.
+  </Fragment>
+  <Fragment slot="aside">
+    <dl class="facts">
+      <div><dt>0</dt><dd>Asphalt and tar in the product — none</dd></div>
+      <div><dt>Fast</dt><dd>Dry time, with soap-and-water cleanup</dd></div>
+      <div><dt>UV</dt><dd>And chemical resistant — built for full desert sun</dd></div>
+      <div><dt>Free</dt><dd>On-site assessment, no obligation</dd></div>
+    </dl>
+  </Fragment>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">Why asphalt goes grey</p>
+        <h2 class="display sec-h">The sun cooks<br />the binder out.</h2>
+      </div>
+      <div class="prose rv">
+        <p>
+          Asphalt is aggregate held together by a flexible binder, and the desert
+          sun spends every summer drying that binder out. As it goes, the surface
+          fades from black to grey, turns brittle, and starts shedding gravel;
+          cracks follow, water gets in, and the freeze–thaw cycle finishes the
+          argument. A dried-out driveway does not need painting — it needs its
+          flexibility back.
+        </p>
+        <p>
+          That is the difference between conditioning and coating. A tar emulsion
+          lays a black film over the top; it looks new for a season, then wears
+          through in the tyre tracks. A conditioner soaks in and feeds the binder
+          itself, which is why the colour that comes back is the asphalt's own.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-dark">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow eyebrow-lt">What goes on it</p>
+        <h2 class="display sec-h">Bio Blacktop,<br />sprayed and rolled.</h2>
+        <a class="plink" href="/products">What each Deco product does →</a>
+      </div>
+      <div class="rv">
+        <ul class="dotlist">
+          <li>Natural oils and co-polymers — contains no asphalt and no tar</li>
+          <li>Conditions old, dried-out asphalt rather than coating it</li>
+          <li>Chemical and UV resistant</li>
+          <li>Dries fast, and cleans up with soap and water</li>
+        </ul>
+        <p class="note" style="border-color: rgba(244,240,233,0.3); color: rgba(244,240,233,0.6);">
+          It gets sprayed and back-rolled, never squeegeed — a squeegee pulls too
+          much material to the surface and you end up with a driveway that looks
+          painted, which is the exact thing this product exists to avoid.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Asphalt sealing questions</p>
+        <h2 class="display sec-h">The blacktop<br />questions.</h2>
+      </div>
+      <div class="faq rv">
+        <details class="qa">
+          <summary>Will it look wet-black like a tar coat?</summary>
+          <div class="qa-b"><p>
+            It brings back the asphalt's own colour — a rich dark surface rather
+            than a painted-on gloss. If a driveway looks lacquered, that is a film
+            sitting on top, and films on asphalt wear through exactly where you
+            drive.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>My asphalt is cracked. Seal or repair first?</summary>
+          <div class="qa-b"><p>
+            Repair first, same rule as concrete: nothing goes down over a problem.
+            What is worth repairing versus living with is exactly what the free
+            assessment sorts out.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>How long before I can drive on it?</summary>
+          <div class="qa-b"><p>
+            It dries fast — faster than our concrete work — but plan around the
+            day of application and we will give you the exact window when we see
+            the surface.
+          </p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Sub>

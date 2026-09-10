@@ -1,0 +1,224 @@
+---
+// Layout for service and city pages. Owns the sub-page hero, the closing
+// assessment CTA, the footer and the shared sub-page styles, so each page
+// carries only its own content.
+import Base from './Base.astro';
+import SiteNav from '../components/SiteNav.astro';
+import { EMAIL, PHONES, SERVICE_PAGES, CITY_PAGES } from '../data/site.js';
+
+const { title, description, crumb, schema } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Fragment slot="head">
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </Fragment>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <SiteNav solid={true} />
+
+  <main id="top">
+    <section class="shero" id="main">
+      <div class="wrap">
+        <nav class="crumbs rv" aria-label="Breadcrumb">
+          <a href="/">Armour Crete</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{crumb}</span>
+        </nav>
+        <h1 class="display shero-h rv"><slot name="h1" /></h1>
+        <div class="shero-rule rv"></div>
+        <div class="shero-grid">
+          <p class="lede rv"><slot name="lede" /></p>
+          <div class="rv"><slot name="aside" /></div>
+        </div>
+      </div>
+    </section>
+
+    <slot />
+
+    <!-- ============ ASSESSMENT CTA ============ -->
+    <section id="cta" class="sec sec-dark">
+      <div class="wrap cta-in">
+        <div class="rv">
+          <p class="eyebrow eyebrow-lt">Get started</p>
+          <h2 class="display sec-h">Request an<br />assessment.</h2>
+          <p class="lede lede-lt">
+            We come out, look at the surface, and tell you what it needs. No charge
+            for the visit, and no obligation attached to it.
+          </p>
+          <a class="btn btn-send cta-btn" href="/#assessment">Request an assessment</a>
+        </div>
+
+        <dl class="cta-contact rv">
+          {PHONES.map((p) => (
+            <div><dt>{p.who}</dt><dd><a class="num" href={`tel:${p.tel}`}>{p.display}</a></dd></div>
+          ))}
+          <div><dt>Email</dt><dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div class="foot-brand">
+        <img src="/logo.png" alt="Armour Crete — concrete sealing and foundation protection, St. George, Utah" width="800" height="800" loading="lazy" />
+        <p class="foot-tag">Concrete &amp; foundation protection · Southern Utah</p>
+      </div>
+
+      <div class="foot-cols">
+        <div>
+          <p class="eyebrow eyebrow-lt">Services</p>
+          {SERVICE_PAGES.map((s) => <a href={s.href}>{s.label}</a>)}
+        </div>
+        <div>
+          <p class="eyebrow eyebrow-lt">Service area</p>
+          <a href="/">St. George</a>
+          {CITY_PAGES.map((c) => <a href={c.href}>{c.label}</a>)}
+        </div>
+        <div>
+          <p class="eyebrow eyebrow-lt">Contact</p>
+          {PHONES.map((p) => <a class="num" href={`tel:${p.tel}`}>{p.display}</a>)}
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <span>Licensed &amp; insured</span>
+        </div>
+      </div>
+    </div>
+    <div class="wrap foot-btm">
+      <span>© 2026 Armour Crete</span>
+      <span>St. George, Utah</span>
+    </div>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      var els = document.querySelectorAll('.rv');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+
+  <style is:global>
+    /* ---------- skip link & anchor offsets ---------- */
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 100;
+      background: var(--ink); color: var(--bone);
+      padding: 0.7em 1.2em; border-radius: 0 0 10px 0; font-size: 0.9rem;
+    }
+    .skip-link:focus { left: 0; }
+    section[id] { scroll-margin-top: 88px; }
+
+    /* ---------- sub-page hero ---------- */
+    .shero { padding-top: clamp(7.5rem, 18vh, 12rem); padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+    .crumbs { font-size: 0.8rem; color: var(--stone-lt); display: flex; gap: 0.6rem; align-items: baseline; }
+    .crumbs a { color: var(--stone); transition: color 0.3s var(--ease); }
+    .crumbs a:hover { color: var(--clay); }
+    .shero-h { font-size: clamp(2.6rem, 7vw, 5.6rem); margin: 1rem 0 0; }
+    .shero-rule { height: 1px; background: var(--line); margin: clamp(2rem, 5vh, 3.2rem) 0 clamp(1.8rem, 4vh, 2.6rem); }
+    .shero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+
+    .facts { display: grid; gap: 0; }
+    .facts > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.25rem; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--line-soft); }
+    .facts > div:first-child { border-top: 1px solid var(--line-soft); }
+    .facts dt { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.02em; color: var(--clay); font-family: var(--mono); font-variant-numeric: tabular-nums; }
+    .facts dd { font-size: 0.88rem; color: var(--stone); line-height: 1.5; }
+
+    /* ---------- sections ---------- */
+    .sec { padding: clamp(4rem, 10vh, 7rem) 0; }
+    .sec-dark { background: var(--ink); color: var(--bone); }
+    .sec-head { margin-bottom: clamp(2.2rem, 5vh, 3.4rem); }
+    .sec-h { font-size: clamp(1.9rem, 4vw, 3rem); margin-top: 0.75rem; }
+    .sec-dark .sec-h { color: var(--bone); }
+    .eyebrow-lt { color: var(--stone-lt); }
+    .lede-lt { color: rgba(244, 240, 233, 0.62); }
+
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+    .prose p { color: var(--stone); font-size: 0.98rem; max-width: 58ch; }
+    .prose p + p { margin-top: 1rem; }
+    .prose strong { color: var(--ink); font-weight: 500; }
+    .sec-dark .prose p { color: rgba(244, 240, 233, 0.62); }
+    .sec-dark .prose strong { color: var(--bone); }
+
+    .dotlist { list-style: none; display: grid; gap: 0; max-width: 58ch; }
+    .dotlist li { font-size: 0.94rem; color: var(--ink); padding: 0.75rem 0 0.75rem 1.4rem; border-bottom: 1px solid var(--line-soft); position: relative; }
+    .dotlist li:first-child { border-top: 1px solid var(--line-soft); }
+    .dotlist li::before { content: ''; position: absolute; left: 0; top: 1.2rem; width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
+    .sec-dark .dotlist li { color: rgba(244, 240, 233, 0.78); border-color: rgba(244, 240, 233, 0.14); }
+
+    .note { margin-top: 1.4rem; font-size: 0.92rem; color: var(--stone); padding-left: 1rem; border-left: 2px solid var(--sand-deep); max-width: 56ch; font-style: italic; }
+
+    /* ---------- process steps (dark) ---------- */
+    .steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
+    .step { border-top: 1px solid rgba(244, 240, 233, 0.16); padding-top: 1.25rem; }
+    .step-n { font-size: 0.76rem; color: var(--clay-lt); }
+    .step-t { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; margin: 0.7rem 0 0.55rem; }
+    .step-d { font-size: 0.92rem; color: rgba(244, 240, 233, 0.58); line-height: 1.58; }
+
+    /* ---------- link chips ---------- */
+    .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.55rem 0.5rem; max-width: 62rem; }
+    .chips li { border-radius: 999px; background: var(--bone-2); font-size: 0.92rem; color: var(--ink); transition: background 0.35s var(--ease), color 0.35s var(--ease); }
+    .chips li > a, .chips li > span { display: inline-block; padding: 0.6em 1.15em; color: inherit; }
+    .chips li:hover { background: var(--ink); color: var(--bone); }
+    .sec-dark .chips li { background: rgba(244, 240, 233, 0.08); color: rgba(244, 240, 233, 0.85); }
+    .sec-dark .chips li:hover { background: var(--clay); color: var(--bone); }
+
+    /* ---------- FAQ ---------- */
+    .faq { border-top: 1px solid var(--line-soft); max-width: 62rem; }
+    .qa { border-bottom: 1px solid var(--line-soft); }
+    .qa summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.35rem 0; font-family: var(--serif); font-size: clamp(1.05rem, 1.7vw, 1.3rem); font-weight: 400; letter-spacing: -0.012em; transition: color 0.3s var(--ease); }
+    .qa summary::-webkit-details-marker { display: none; }
+    .qa summary::after { content: ''; flex: none; width: 11px; height: 11px; border-right: 1.5px solid var(--stone); border-bottom: 1.5px solid var(--stone); transform: rotate(45deg) translate(-2px, -2px); transition: transform 0.35s var(--ease), border-color 0.3s var(--ease); }
+    .qa[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); border-color: var(--clay); }
+    .qa summary:hover { color: var(--clay); }
+    .qa-b { padding: 0 0 1.6rem; max-width: 62ch; }
+    .qa-b p { color: var(--stone); font-size: 0.96rem; }
+    .qa-b p + p { margin-top: 0.9rem; }
+
+    /* ---------- inline text links ---------- */
+    .tlink { color: var(--clay); font-weight: 500; transition: opacity 0.3s var(--ease); }
+    .tlink:hover { opacity: 0.65; }
+    .plink { display: inline-block; margin-top: 1.5rem; font-size: 0.92rem; font-weight: 500; color: var(--clay); transition: opacity 0.3s var(--ease); }
+    .plink:hover { opacity: 0.65; }
+
+    /* ---------- CTA ---------- */
+    .cta-in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+    .cta-in .lede { margin-top: 1.3rem; }
+    .cta-btn { margin-top: 1.9rem; }
+    .btn-send { background: var(--bone); color: var(--ink); }
+    .btn-send:hover { background: var(--clay); color: var(--bone); }
+    .cta-contact { display: grid; gap: 0.9rem; align-content: start; padding-top: 0.5rem; }
+    .cta-contact > div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(244, 240, 233, 0.14); padding-bottom: 0.9rem; max-width: 26rem; }
+    .cta-contact dt { font-size: 0.86rem; color: var(--stone-lt); }
+    .cta-contact dd a { font-size: 0.94rem; color: var(--bone); transition: color 0.3s var(--ease); }
+    .cta-contact dd a:hover { color: var(--clay-lt); }
+
+    /* ---------- footer ---------- */
+    .foot { background: var(--ink-2); color: var(--bone); padding-top: clamp(3rem, 7vh, 4.5rem); }
+    .foot-in { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 2.5rem; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+    .foot-brand img { width: 74px; height: 74px; border-radius: 3px; }
+    .foot-tag { margin-top: 1rem; font-size: 0.88rem; color: var(--stone-lt); max-width: 30ch; }
+    .foot-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .foot-cols > div { display: grid; gap: 0.45rem; align-content: start; font-size: 0.9rem; color: rgba(244, 240, 233, 0.68); }
+    .foot-cols .eyebrow-lt { margin-bottom: 0.5rem; }
+    .foot-cols a { transition: color 0.3s var(--ease); display: inline-block; padding-block: 3px; }
+    .foot-cols a:hover { color: var(--bone); }
+    .cta-contact dd a, .crumbs a { display: inline-block; padding-block: 3px; }
+    .plink { padding-block: 3px; }
+    .foot-btm { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.35rem; border-top: 1px solid rgba(244, 240, 233, 0.12); font-size: 0.8rem; color: var(--stone-lt); }
+
+    @media (max-width: 900px) {
+      .shero-grid, .split, .cta-in { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .foot-in { grid-template-columns: 1fr; }
+      .foot-cols { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</Base>

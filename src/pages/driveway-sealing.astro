@@ -1,0 +1,165 @@
+---
+import Sub from '../layouts/Sub.astro';
+import { servicePageSchema } from '../data/site.js';
+
+const description =
+  'Concrete driveway sealing in St. George and Washington County, Utah. Cleaned, dried, sealed with a penetrating Deco sealer, cured in 24 hours. Free on-site assessment.';
+
+const schema = servicePageSchema({
+  path: '/driveway-sealing',
+  name: 'Driveway sealing',
+  description,
+  crumb: 'Driveway sealing',
+});
+
+const steps = [
+  { n: '01', t: 'Clean', d: 'The slab gets cleaned end to end. Nothing goes down over dirt.' },
+  { n: '02', t: 'Dry', d: 'We wait for it to dry completely. Sealer over moisture is how finishes fail.' },
+  { n: '03', t: 'Seal', d: 'Deco product, matched to the surface and the exposure it lives in.' },
+  { n: '04', t: 'Cure', d: 'Twenty-four hours before you walk or drive on it. Then it is yours again.' },
+];
+---
+
+<Sub
+  title="Driveway Sealing | St. George, UT | Armour Crete"
+  description={description}
+  crumb="Driveway sealing"
+  schema={schema}
+>
+  <Fragment slot="h1">Driveway sealing,<br />done properly.</Fragment>
+  <Fragment slot="lede">
+    Your driveway takes more punishment than any other concrete on the property —
+    full sun, vehicle weight, and every winter night that dips below freezing.
+    We clean it, seal it with a penetrating Deco product, and hand it back to you
+    in twenty-four hours.
+  </Fragment>
+  <Fragment slot="aside">
+    <dl class="facts">
+      <div><dt>24h</dt><dd>Before you drive on it again</dd></div>
+      <div><dt>0</dt><dd>Films, streaks or plastic sheen — it soaks in</dd></div>
+      <div><dt>2yr</dt><dd>Standing maintenance cycle, if you want it</dd></div>
+      <div><dt>Free</dt><dd>On-site assessment, no obligation</dd></div>
+    </dl>
+  </Fragment>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">Why driveways go first</p>
+        <h2 class="display sec-h">The hardest-working<br />slab you own.</h2>
+      </div>
+      <div class="prose rv">
+        <p>
+          A west-facing driveway in Washington County swings through more than a
+          hundred degrees between a January night and a July afternoon, and concrete
+          moves with every degree of it. That movement opens hairline cracks; the
+          slab is porous, so water follows the cracks down and carries dissolved
+          salt with it — off the road, out of the softener discharge, up from the
+          soil itself. When that water freezes, or the salt crystallises as it
+          dries, the surface gets pushed apart from the inside. Scaling, spalling
+          and the white bloom of efflorescence are all the same story.
+        </p>
+        <p>
+          Sealing does not stop the movement — nothing does. It keeps the pore
+          network from staying saturated, which starves freeze–thaw and salt
+          crystallisation of the one thing they both need.
+        </p>
+        <p>
+          Cracks and failed joints get handled first. Sealer over a broken surface
+          is money down the drain, so filling, patching and
+          <a class="tlink" href="/expansion-joint-replacement">expansion joint work</a>
+          come before anything else goes down.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-dark">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow eyebrow-lt">Our driveway sealing process</p>
+        <h2 class="display sec-h">Four steps. No shortcuts<br />in any of them.</h2>
+      </div>
+      <ol class="steps">
+        {steps.map((s) => (
+          <li class="step rv">
+            <span class="num step-n">{s.n}</span>
+            <h3 class="step-t">{s.t}</h3>
+            <p class="step-d">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">What goes on it</p>
+        <h2 class="display sec-h">DECO 20 Clear,<br />as a rule.</h2>
+        <a class="plink" href="/products">What each Deco product does →</a>
+      </div>
+      <div class="rv">
+        <ul class="dotlist">
+          <li>A reactive penetrating sealer — it soaks in rather than sitting on top</li>
+          <li>Dries 100% transparent: no film, no sheen, no sign it is there</li>
+          <li>Sharply slows how fast mould and mildew come back after a wash</li>
+          <li>Non-hazardous, water-based, no solvents</li>
+        </ul>
+        <p class="note">
+          It goes down early in the morning, before the slab has taken on the day's
+          heat. On a hot surface it flash-dries and leaves whiting and streaks —
+          which in southern Utah is not a small detail, it is most of the job. If
+          you want the colour deepened instead of left alone, that is the
+          <a class="tlink" href="/wet-look-concrete-sealing">wet-look conversation</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Driveway sealing questions</p>
+        <h2 class="display sec-h">Asked before<br />every driveway.</h2>
+      </div>
+      <div class="faq rv">
+        <details class="qa">
+          <summary>How long am I without the driveway?</summary>
+          <div class="qa-b"><p>
+            Twenty-four hours after the sealer goes down. Plan for one day of street
+            parking and you will not be caught out — we would rather tell you up
+            front than have you find out on the way to work.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>Will it change how the driveway looks?</summary>
+          <div class="qa-b"><p>
+            Not with the clear penetrating sealer — it dries fully transparent.
+            Wet-look and decorative finishes deliberately deepen the colour, and
+            that is a choice, not a side effect. We show you the difference on your
+            own concrete before anything is committed to.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>My driveway is brand new. Can it be sealed now?</summary>
+          <div class="qa-b"><p>
+            Not immediately — fresh concrete has to cure and give up its moisture
+            first, and sealing over that is how finishes fail early. If you are mid
+            build, talk to us at the pour and we will schedule it properly.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>How often does it need doing again?</summary>
+          <div class="qa-b"><p>
+            It depends on the product and the exposure — a shaded slab and a
+            west-facing one do not wear at anything like the same rate. Our
+            maintenance program runs on a two-year cycle: we come back, clean it,
+            and put a fresh coat down before the surface ever gets far enough gone
+            to need restoring.
+          </p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Sub>

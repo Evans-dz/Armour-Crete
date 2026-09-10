@@ -1,0 +1,129 @@
+---
+import Sub from '../layouts/Sub.astro';
+import { servicePageSchema } from '../data/site.js';
+
+const description =
+  'Wet-look and decorative concrete sealing in St. George, Utah. Colour deepened from within the surface, or a high-shine finish on top — shown on your own concrete before you decide.';
+
+const schema = servicePageSchema({
+  path: '/wet-look-concrete-sealing',
+  name: 'Wet-look and decorative concrete sealing',
+  description,
+  crumb: 'Wet-look & decorative',
+});
+---
+
+<Sub
+  title="Wet-Look & Decorative Sealing | St. George UT | Armour Crete"
+  description={description}
+  crumb="Wet-look & decorative"
+  schema={schema}
+>
+  <Fragment slot="h1">The colour it has<br />when it rains.</Fragment>
+  <Fragment slot="lede">
+    A wet-look finish deepens the colour of concrete, pavers or stone and holds
+    it there — the way the surface looks in the first minute of a storm, kept.
+    There are two honest ways to get there, and they age very differently, so we
+    show you both on your own concrete before you choose.
+  </Fragment>
+  <Fragment slot="aside">
+    <dl class="facts">
+      <div><dt>2</dt><dd>Ways to a wet look — from within, or as a shine on top</dd></div>
+      <div><dt>UV</dt><dd>Protection in both — the desert sun is the main event</dd></div>
+      <div><dt>Demo</dt><dd>Shown on your own surface before you commit</dd></div>
+      <div><dt>Free</dt><dd>On-site assessment, no obligation</dd></div>
+    </dl>
+  </Fragment>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">The honest distinction</p>
+        <h2 class="display sec-h">From within,<br />or on top.</h2>
+      </div>
+      <div class="prose rv">
+        <p>
+          <strong>SilaCast BES</strong> deepens the material's own colour from
+          below. It penetrates porous surfaces — concrete pavers, roof and barrel
+          tile, natural stone — rather than laying a film on top, it carries two
+          forms of UV protection, and it never needs stripping before it can be
+          re-coated. A topical film can yellow under UV, it can peel, and taking
+          one off means harsh chemicals; a penetrating enhancer has none of those
+          problems, because there is no film to fail.
+        </p>
+        <p>
+          <strong>Shine-A-Cast</strong> is the other road: a hybrid that penetrates
+          to enhance colour and also leaves a protective layer on the surface.
+          That layer is what produces the high shine, what locks joint sand in
+          place on paver work, and what brings a sun-faded surface back — pigment
+          can even be added to tune the colour. It is restricted to approved
+          applicators, which we are.
+        </p>
+        <p>
+          Which one belongs on your property depends on the surface, the sun it
+          takes, and how you use it — a high-shine layer next to a pool is a
+          conversation about <a class="tlink" href="/pool-deck-sealing">slip
+          resistance</a> before it is a conversation about looks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-dark">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow eyebrow-lt">Where it earns its keep</p>
+        <h2 class="display sec-h">Made for<br />feature surfaces.</h2>
+      </div>
+      <div class="rv">
+        <ul class="dotlist">
+          <li>Paver driveways and entries — colour up, joint sand locked</li>
+          <li>Decorative patios and courtyards</li>
+          <li>Exposed aggregate the builder got right — lifted, not hidden</li>
+          <li>Sun-faded surfaces that need their colour back</li>
+          <li>Roof tile and retaining walls, enhanced from within</li>
+        </ul>
+        <p class="note" style="border-color: rgba(244,240,233,0.3); color: rgba(244,240,233,0.6);">
+          If you want protection with no change in appearance at all, that is a
+          different product doing a quieter job — see
+          <a class="tlink" href="/driveway-sealing">driveway sealing</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Decorative sealing questions</p>
+        <h2 class="display sec-h">Decided at<br />the demo.</h2>
+      </div>
+      <div class="faq rv">
+        <details class="qa">
+          <summary>How dark will it go?</summary>
+          <div class="qa-b"><p>
+            That depends on the surface — how porous it is and what colour is
+            already in it. Which is exactly why we demo it on your own concrete
+            first: you see the actual result, not a brochure's version of it.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>Will it yellow in the sun?</summary>
+          <div class="qa-b"><p>
+            Yellowing is a film problem, and it is why we lean on penetrating
+            products where they fit. SilaCast enhances from within the substrate
+            and carries two types of UV protection; Shine-A-Cast's surface layer is
+            UV protected as well. What we will not do is put down a bargain acrylic
+            film and let the desert have it.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>How long before I can use the surface?</summary>
+          <div class="qa-b"><p>
+            Plan for twenty-four hours, the same as any sealing work we do.
+          </p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Sub>

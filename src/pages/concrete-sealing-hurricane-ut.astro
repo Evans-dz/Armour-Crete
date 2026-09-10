@@ -1,0 +1,117 @@
+---
+import Sub from '../layouts/Sub.astro';
+import { cityPageSchema, SERVICE_PAGES } from '../data/site.js';
+
+const description =
+  'Concrete sealing in Hurricane, Utah — driveways, patios, pool decks, garage floors and asphalt out to Sand Hollow. Based in St. George, free on-site assessment.';
+
+const schema = cityPageSchema({
+  path: '/concrete-sealing-hurricane-ut',
+  city: 'Hurricane',
+  description,
+});
+---
+
+<Sub
+  title="Concrete Sealing in Hurricane, UT | Armour Crete"
+  description={description}
+  crumb="Hurricane, UT"
+  schema={schema}
+>
+  <Fragment slot="h1">Concrete sealing<br />in Hurricane.</Fragment>
+  <Fragment slot="lede">
+    Hurricane concrete lives a hard life — full desert exposure on the way out to
+    Sand Hollow, salt pools in the backyards, and garage floors that work for a
+    living. We seal all of it with named Deco products, and the assessment is
+    free anywhere in town.
+  </Fragment>
+  <Fragment slot="aside">
+    <dl class="facts">
+      <div><dt>24h</dt><dd>Cure before the surface is back in use</dd></div>
+      <div><dt>Deco</dt><dd>The only products we put down</dd></div>
+      <div><dt>Free</dt><dd>On-site assessment, anywhere in Hurricane</dd></div>
+    </dl>
+  </Fragment>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Services in Hurricane, UT</p>
+        <h2 class="display sec-h">Everything we do,<br />done here.</h2>
+      </div>
+      <ul class="chips rv">
+        {SERVICE_PAGES.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+      </ul>
+      <div class="prose rv" style="margin-top: 2rem;">
+        <p>
+          Driveways and patios get the penetrating-sealer treatment;
+          <a class="tlink" href="/pool-deck-sealing">pool decks</a> get the
+          salt-specific product; garage floors that hold vehicles, tools and toys
+          get sealed so they wipe down instead of staining. Hurricane also has
+          more <a class="tlink" href="/asphalt-sealing">asphalt drives and
+          lanes</a> than most of the county, and ours is the no-tar way to bring
+          those back.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-dark">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow eyebrow-lt">The local physics</p>
+        <h2 class="display sec-h">Full exposure,<br />no shade to hide in.</h2>
+      </div>
+      <div class="prose rv">
+        <p>
+          Out here the sun does most of the damage and the winter nights finish
+          it. An exposed slab swings through more than a hundred degrees across
+          the year; the movement opens hairline cracks, water and salt follow
+          them in, and freeze–thaw plus salt crystallisation break the surface
+          from the inside. Unsealed concrete in full exposure simply runs that
+          cycle faster than concrete that gets any shade at all.
+        </p>
+        <p>
+          A penetrating sealer keeps the pore network from staying saturated —
+          which is the whole game. Prep first where the surface needs it,
+          <a class="tlink" href="/expansion-joint-replacement">joints re-filled</a>
+          where they have failed, and the right product for the exposure rather
+          than one product for everything.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Hurricane questions</p>
+        <h2 class="display sec-h">Asked in<br />Hurricane.</h2>
+      </div>
+      <div class="faq rv">
+        <details class="qa">
+          <summary>Do you really come out to Hurricane for a free assessment?</summary>
+          <div class="qa-b"><p>
+            Yes. We are based in St. George and Hurricane is squarely inside our
+            home patch — the visit is free and carries no obligation.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>Can you do the pool deck and the driveway in one job?</summary>
+          <div class="qa-b"><p>
+            That is the usual arrangement. They take different products — the
+            deck gets the salt-specific sealer, the driveway the clear
+            penetrating one — but one visit, one scope, one cure day.
+          </p></div>
+        </details>
+        <details class="qa">
+          <summary>How long is the surface out of action?</summary>
+          <div class="qa-b"><p>
+            Twenty-four hours for concrete. Asphalt dries faster, and we give you
+            the exact window when we see the surface.
+          </p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Sub>
