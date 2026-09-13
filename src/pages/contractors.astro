@@ -1,0 +1,355 @@
+---
+import Sub from '../layouts/Sub.astro';
+import { servicePageSchema, EMAIL, PHONES } from '../data/site.js';
+
+const description =
+  'Concrete sealing and foundation waterproofing as a trade partner for builders, general contractors, pool builders, HOAs and municipalities in St. George and Washington County, Utah.';
+
+const schema = servicePageSchema({
+  path: '/contractors',
+  name: 'Trade partner concrete sealing and foundation waterproofing for contractors',
+  description,
+  crumb: 'For contractors',
+});
+
+const trades = [
+  {
+    n: '01',
+    t: 'General contractors & home builders',
+    d: 'Foundation waterproofing and damp proofing between pour and backfill, plus flatwork sealing once the slab has cured. Scheduled to your calendar, held when the pour date moves.',
+  },
+  {
+    n: '02',
+    t: 'Pool builders',
+    d: 'Salt Shield 303 on decks and surrounds before handover. Penetrating, dries clear, and the manufacturer states it does not change the skid resistance of the surface.',
+  },
+  {
+    n: '03',
+    t: 'Landscape & hardscape',
+    d: 'Pavers, travertine and natural stone sealed with SilaCast BES or TravaCast — the finish that makes the installation photograph the way the client imagined it.',
+  },
+  {
+    n: '04',
+    t: 'HOA & property management',
+    d: 'Common-area flatwork, expansion joints and asphalt on a maintenance cycle rather than a callout. Bid from a walk, scoped in writing.',
+  },
+  {
+    n: '05',
+    t: 'Commercial & municipal',
+    d: 'Parking structures, walkways, pads and public flatwork. Chloride and deicing-salt protection where the surface takes real traffic.',
+  },
+];
+---
+
+<Sub
+  title="For Contractors & Builders | Concrete Sealing Trade Partner | St. George UT"
+  description={description}
+  crumb="For contractors"
+  schema={schema}
+  hideCta={true}
+>
+  <Fragment slot="h1">Your sealing sub,<br />not your problem.</Fragment>
+  <Fragment slot="lede">
+    Builders, GCs, pool and landscape contractors, HOAs and municipalities — we
+    handle the sealing and waterproofing scope so it comes off your punch list
+    instead of onto it. Based in St. George, working across Washington County.
+  </Fragment>
+  <Fragment slot="aside">
+    <dl class="facts">
+      <div><dt>ICC</dt><dd>Approved Deco foundation membrane — applicator-restricted, and we hold the certification</dd></div>
+      <div><dt>24h</dt><dd>Cure before traffic on flatwork — stated up front so you can plan around it</dd></div>
+      <div><dt>1</dt><dd>Point of contact from first walk to sign-off. You call one number</dd></div>
+    </dl>
+  </Fragment>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">Why sub it out</p>
+        <h2 class="display sec-h">A scope that<br />bites back.</h2>
+      </div>
+      <div class="prose rv">
+        <p>
+          Sealing looks like the easy line item until it fails. Sealer over a slab
+          that has not given up its moisture clouds and peels. Product on a pool
+          deck that is not rated for salt turns chalky in two summers. A membrane
+          rushed in ahead of backfill gets buried before it has cured, and nobody
+          finds out for three years.
+        </p>
+        <p>
+          Every one of those comes back to the builder, not the sub. We would
+          rather tell you the slab is not ready than put something down to hold a
+          date — and we will say so in writing, so the delay is documented as ours
+          and not a surprise on your schedule.
+        </p>
+        <p>
+          We use <a class="tlink" href="/products">Deco products exclusively</a> and
+          hold the certification for the applicator-restricted foundation line.
+          Same crew every time, licensed and insured, with the documentation your
+          office needs on request.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-dark">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow eyebrow-lt">Who we work with</p>
+        <h2 class="display sec-h">Five kinds of<br />trade partner.</h2>
+      </div>
+      <ol class="tlist rv">
+        {trades.map((s) => (
+          <li>
+            <span class="tnum num">{s.n}</span>
+            <div>
+              <h3 class="tt">{s.t}</h3>
+              <p class="td">{s.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="eyebrow">How it runs</p>
+        <h2 class="display sec-h">Boring, on<br />purpose.</h2>
+      </div>
+      <div class="rv">
+        <ul class="dotlist dotlist-dk">
+          <li>Site walk and a written scope — what goes down, where, and on which surfaces</li>
+          <li>Bid against that scope, not a square-foot guess over the phone</li>
+          <li>Scheduled to your calendar; we hold the slot when the date moves</li>
+          <li>Certificate of insurance and licence details to your office on request</li>
+          <li>One crew, one contact, from first walk to sign-off</li>
+          <li>Repeat-builder terms discussed at the first job rather than the tenth</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRADE PARTNER FORM ============ -->
+  <section id="trade" class="sec sec-dark">
+    <div class="wrap trade-in">
+      <div class="rv">
+        <p class="eyebrow eyebrow-lt">Work with us</p>
+        <h2 class="display sec-h">Start a<br />conversation.</h2>
+        <p class="lede lede-lt">
+          Tell us what you build and what you need covered. We will come out, walk
+          it, and put a scope in writing. No charge for the walk.
+        </p>
+        <dl class="cta-contact" style="margin-top: 2rem;">
+          {PHONES.map((p) => (
+            <div><dt>{p.who}</dt><dd><a class="num" href={`tel:${p.tel}`}>{p.display}</a></dd></div>
+          ))}
+          <div><dt>Email</dt><dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd></div>
+        </dl>
+      </div>
+
+      <form class="ass-form rv" id="tradeform" novalidate>
+        <div class="f-row">
+          <label class="fld"><span>Company</span><input name="company" type="text" autocomplete="organization" required /></label>
+          <label class="fld"><span>Your name</span><input name="name" type="text" autocomplete="name" required /></label>
+        </div>
+        <div class="f-row">
+          <label class="fld"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required /></label>
+          <label class="fld"><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
+        </div>
+        <div class="f-row">
+          <label class="fld">
+            <span>Trade</span>
+            <select name="trade">
+              <option>General contractor</option>
+              <option>Home builder</option>
+              <option>Pool builder</option>
+              <option>Landscape or hardscape</option>
+              <option>HOA or property management</option>
+              <option>Commercial</option>
+              <option>Municipal</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="fld">
+            <span>Scope</span>
+            <select name="scope">
+              <option>Foundation waterproofing</option>
+              <option>Damp proofing</option>
+              <option>Flatwork sealing</option>
+              <option>Pool decks</option>
+              <option>Pavers or natural stone</option>
+              <option>Expansion joints</option>
+              <option>Asphalt</option>
+              <option>Several of these</option>
+            </select>
+          </label>
+        </div>
+        <div class="f-row">
+          <label class="fld">
+            <span>Volume</span>
+            <select name="volume">
+              <option>One project</option>
+              <option>A few a year</option>
+              <option>Ongoing / production</option>
+              <option>Maintenance cycle</option>
+            </select>
+          </label>
+          <label class="fld"><span>Where</span><input name="where" type="text" placeholder="Subdivision, address or area" /></label>
+        </div>
+        <label class="fld"><span>Timing and anything else we should know</span><textarea name="notes" rows="3"></textarea></label>
+        <input type="text" name="_honey" class="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="btn btn-send" type="submit">Send enquiry</button>
+        <p class="f-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Trade partner enquiry. Same transport as the homeowner form: posts JSON to
+    // FormSubmit, which forwards to evans@armour-crete.com. On any network or
+    // rejection failure we open the mail client rather than swallow the lead —
+    // a dropped contractor enquiry is a dropped contract.
+    (function () {
+      var f = document.getElementById('tradeform');
+      if (!f) return;
+
+      var ENDPOINT = 'https://formsubmit.co/ajax/evans@armour-crete.com';
+      var btn = f.querySelector('button[type=submit]');
+      var status = f.querySelector('.f-status');
+      var sending = false;
+
+      function say(msg, kind) {
+        status.textContent = msg;
+        status.className = 'f-status' + (kind ? ' is-' + kind : '');
+      }
+
+      function mailtoFallback(d) {
+        var body = [
+          'Company: ' + d.company, 'Contact: ' + d.name,
+          'Phone: ' + d.phone, 'Email: ' + d.email,
+          'Trade: ' + d.trade, 'Scope: ' + d.scope, 'Volume: ' + d.volume,
+          'Where: ' + d.where, '', d.notes,
+        ].join('\n');
+        window.location.href =
+          'mailto:evans@armour-crete.com?subject=' +
+          encodeURIComponent('Trade enquiry — ' + (d.company || d.name)) +
+          '&body=' + encodeURIComponent(body);
+      }
+
+      f.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        if (sending) return;
+        if (!f.reportValidity()) return;
+
+        var fd = new FormData(f);
+        var d = {};
+        fd.forEach(function (v, k) { d[k] = (v || '').toString().trim(); });
+
+        // honeypot: bots fill hidden fields, people do not
+        if (d._honey) return;
+        delete d._honey;
+
+        d._subject = 'Trade enquiry — ' + (d.company || d.name || 'no company');
+        d._template = 'table';
+        d._captcha = 'false';
+
+        sending = true;
+        btn.disabled = true;
+        var label = btn.textContent;
+        btn.textContent = 'Sending…';
+        say('');
+
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(d),
+        })
+          .then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; });
+          })
+          .then(function (res) {
+            if (!res.ok || String(res.j.success) === 'false') throw new Error('rejected');
+            f.reset();
+            say('Thank you — that came through. We will be in touch to arrange a walk.', 'ok');
+          })
+          .catch(function () {
+            say('That did not send. Opening your email instead — or call 435·994·5235.', 'err');
+            mailtoFallback(d);
+          })
+          .then(function () {
+            sending = false;
+            btn.disabled = false;
+            btn.textContent = label;
+          });
+      });
+    })();
+  </script>
+
+  <style>
+    /* ---------- numbered trade list ---------- */
+    .tlist { list-style: none; display: grid; gap: 0; }
+    .tlist li {
+      display: grid;
+      grid-template-columns: 4rem 1fr;
+      gap: clamp(1rem, 3vw, 2.5rem);
+      padding: clamp(1.4rem, 3vh, 2rem) 0;
+      border-bottom: 1px solid rgba(244, 240, 233, 0.12);
+      align-items: baseline;
+    }
+    .tlist li:first-child { border-top: 1px solid rgba(244, 240, 233, 0.12); }
+    .tnum { font-size: 0.85rem; color: var(--clay-lt); }
+    .tt { font-family: var(--serif); font-weight: 400; font-size: 1.25rem; letter-spacing: -0.015em; margin-bottom: 0.4rem; }
+    .td { font-size: 0.94rem; line-height: 1.6; color: rgba(244, 240, 233, 0.62); max-width: 58ch; }
+
+    .dotlist-dk li { color: var(--stone); }
+
+    /* ---------- form ---------- */
+    .trade-in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+    .ass-form { display: grid; gap: 0.85rem; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .fld { display: grid; gap: 0.4rem; }
+    .fld > span { font-size: 0.8rem; color: var(--stone-lt); letter-spacing: 0.01em; }
+    .fld input, .fld select, .fld textarea {
+      background: rgba(244, 240, 233, 0.06);
+      border: 1px solid rgba(244, 240, 233, 0.16);
+      border-radius: 10px;
+      padding: 0.72em 0.9em;
+      color: var(--bone);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+    }
+    .fld textarea { resize: vertical; }
+    .fld input::placeholder { color: rgba(244, 240, 233, 0.32); }
+    .fld input:focus, .fld select:focus, .fld textarea:focus {
+      border-color: var(--clay-lt);
+      background: rgba(244, 240, 233, 0.09);
+    }
+    .fld select option { background: var(--ink-2); color: var(--bone); }
+    .btn-send { background: var(--bone); color: var(--ink); justify-self: start; margin-top: 0.4rem; }
+    .btn-send:hover { background: var(--clay); color: var(--bone); }
+    .btn-send:disabled { opacity: 0.6; cursor: default; }
+    .f-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .f-status:empty { display: none; }
+    .f-status {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      padding: 0.7em 0.9em;
+      border-radius: 10px;
+      margin-top: 0.2rem;
+    }
+    .f-status.is-ok { background: rgba(185, 103, 66, 0.18); color: #f0dccf; }
+    .f-status.is-err { background: rgba(244, 240, 233, 0.1); color: #f0dccf; }
+
+    @media (max-width: 860px) {
+      .trade-in { grid-template-columns: 1fr; }
+      .tlist li { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
+    }
+    @media (max-width: 560px) {
+      .f-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</Sub>

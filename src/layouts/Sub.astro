@@ -6,7 +6,9 @@ import Base from './Base.astro';
 import SiteNav from '../components/SiteNav.astro';
 import { EMAIL, PHONES, SERVICE_PAGES, CITY_PAGES } from '../data/site.js';
 
-const { title, description, crumb, schema } = Astro.props;
+// hideCta: pages that close with their own form (e.g. /contractors) suppress
+// the homeowner assessment CTA rather than stacking two calls to action.
+const { title, description, crumb, schema, hideCta = false } = Astro.props;
 ---
 
 <Base title={title} description={description}>
@@ -36,26 +38,28 @@ const { title, description, crumb, schema } = Astro.props;
     <slot />
 
     <!-- ============ ASSESSMENT CTA ============ -->
-    <section id="cta" class="sec sec-dark">
-      <div class="wrap cta-in">
-        <div class="rv">
-          <p class="eyebrow eyebrow-lt">Get started</p>
-          <h2 class="display sec-h">Request an<br />assessment.</h2>
-          <p class="lede lede-lt">
-            We come out, look at the surface, and tell you what it needs. No charge
-            for the visit, and no obligation attached to it.
-          </p>
-          <a class="btn btn-send cta-btn" href="/#assessment">Request an assessment</a>
-        </div>
+    {!hideCta && (
+      <section id="cta" class="sec sec-dark">
+        <div class="wrap cta-in">
+          <div class="rv">
+            <p class="eyebrow eyebrow-lt">Get started</p>
+            <h2 class="display sec-h">Request an<br />assessment.</h2>
+            <p class="lede lede-lt">
+              We come out, look at the surface, and tell you what it needs. No charge
+              for the visit, and no obligation attached to it.
+            </p>
+            <a class="btn btn-send cta-btn" href="/#assessment">Request an assessment</a>
+          </div>
 
-        <dl class="cta-contact rv">
-          {PHONES.map((p) => (
-            <div><dt>{p.who}</dt><dd><a class="num" href={`tel:${p.tel}`}>{p.display}</a></dd></div>
-          ))}
-          <div><dt>Email</dt><dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd></div>
-        </dl>
-      </div>
-    </section>
+          <dl class="cta-contact rv">
+            {PHONES.map((p) => (
+              <div><dt>{p.who}</dt><dd><a class="num" href={`tel:${p.tel}`}>{p.display}</a></dd></div>
+            ))}
+            <div><dt>Email</dt><dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd></div>
+          </dl>
+        </div>
+      </section>
+    )}
   </main>
 
   <!-- ============ FOOTER ============ -->
